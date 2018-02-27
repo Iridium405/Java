@@ -1,6 +1,17 @@
 package iridiumdev;
 
-public abstract class CombatObjects {
+public class CombatObjects {
+    private Weapon weaponName;
+    private Weapon weaponDamage;
+    private Weapon weaponEndurance;
+
+    private Armour armourName;
+    private Armour armourProtection;
+    private Armour armourEndurance;
+
+    private Item itemName;
+    private Item effect;
+
     /*
     Weapon:
         Nazwa
@@ -12,13 +23,13 @@ public abstract class CombatObjects {
         Obrona
         Wytrzymałość
 
-    Naturals:
-        Nazwa (Kły, pazury, skrzydła)
-        Obrażenia
-        Specjalne cechy
-
-    Misc:
+    Item:
         Nazwa (eliksir)
         Efekt
+
+
+    public void use();
+    public void repair();
+    public void throwAway();
      */
 }
