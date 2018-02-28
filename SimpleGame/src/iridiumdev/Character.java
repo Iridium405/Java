@@ -14,8 +14,10 @@ public class Character {
     private int strengh;
     private int inteligence;
     private int defence;
+    boolean isAlive;
+    boolean isEnemy;
 
-    public Character(String name, double life, double mana, double stamina, int level, int experience, int expGivenWhenDead, ArrayList<CombatObjects> equipment, int strengh, int inteligence, int defence) {
+    public Character(String name, double life, double mana, double stamina, int level, int experience, int expGivenWhenDead, ArrayList<CombatObjects> equipment, int strengh, int inteligence, int defence, boolean isAlive, boolean isEnemy) {
         this.name = name;
         this.life = life;
         this.mana = mana;
@@ -27,8 +29,23 @@ public class Character {
         this.strengh = strengh;
         this.inteligence = inteligence;
         this.defence = defence;
+        this.isEnemy = isEnemy;
+        this.isAlive = isAlive;
     }
 
+    public Character(String name, double life, double mana, double stamina, int level, int experience, ArrayList<CombatObjects> equipment, int strengh, int inteligence, int defence, boolean isAlive) {
+        this.name = name;
+        this.life = life;
+        this.mana = mana;
+        this.stamina = stamina;
+        this.level = level;
+        this.experience = experience;
+        this.equipment = equipment;
+        this.strengh = strengh;
+        this.inteligence = inteligence;
+        this.defence = defence;
+        this.isAlive = isAlive;
+    }
 
     /*
     Imię/nazwa

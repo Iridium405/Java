@@ -1,35 +1,15 @@
 package iridiumdev;
 
 public class CombatObjects {
-    private Weapon weaponName;
-    private Weapon weaponDamage;
-    private Weapon weaponEndurance;
-
-    private Armour armourName;
-    private Armour armourProtection;
-    private Armour armourEndurance;
-
-    private Item itemName;
-    private Item effect;
-
     /*
-    Weapon:
-        Nazwa
-        Obrażenia
-        Wytrzymałość
+    Weapon
+    Armour
+    Item
 
-    Armour:
-        Nazwa
-        Obrona
-        Wytrzymałość
-
-    Item:
-        Nazwa (eliksir)
-        Efekt
-
-
-    public void use();
-    public void repair();
-    public void throwAway();
+    Klasa umożliwia składowanie rożnych obiektów w jednej tablicy.
+    Potrzebna będzie metoda sprawdzająca ilość posiadanych obiektów
+        Weapon (max. 1; podwójne bronie to jeden obiekt, który automatycznie blokuje posiadanie tarczy (Armour.armourType =3)),
+        Armour (max. 3, każdy innego typu (Armour.armourType))
+        Item (max. 2, każde innego typu (Item.itemType)
      */
 }
