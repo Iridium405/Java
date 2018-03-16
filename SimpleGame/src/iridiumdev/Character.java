@@ -1,12 +1,11 @@
 package iridiumdev;
 
-import java.util.ArrayList;
-
 public abstract class Character {
     private String name;
     private double hitPoints;
     private double energy;
     private double stamina;
+    private double money;
     private int level;
     private int experience;
     private int expGivenWhenDead;
@@ -16,12 +15,11 @@ public abstract class Character {
     private int power;
     private int protection;
     private int focus;
-    private String affinity;
     private boolean isAlive;
     private boolean isEnemy;
 
     public Character(String name, double hitPoints, double energy, double stamina, int level, int experience, int strength,
-                     int defence, int quickness, int power, int protection, int focus, String affinity, boolean isAlive) {
+                     int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.energy = energy;
@@ -34,12 +32,11 @@ public abstract class Character {
         this.power = power;
         this.protection = protection;
         this.focus = focus;
-        this.affinity = affinity;
         this.isAlive = isAlive;
     }
 
     public Character(boolean isEnemy, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
-                     int defence, int quickness, int power, int protection, int focus, String affinity, boolean isAlive) {
+                     int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.isAlive = isAlive;
         this.name = name;
         this.hitPoints = hitPoints;
@@ -52,7 +49,24 @@ public abstract class Character {
         this.power = power;
         this.protection = protection;
         this.focus = focus;
-        this.affinity = affinity;
+        this.isEnemy = isEnemy;
+    }
+
+    public Character(double money, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
+                     int defence, int quickness, int power, int protection, int focus, boolean isAlive, boolean isEnemy) {
+        this.name = name;
+        this.hitPoints = hitPoints;
+        this.energy = energy;
+        this.stamina = stamina;
+        this.money = money;
+        this.expGivenWhenDead = expGivenWhenDead;
+        this.strength = strength;
+        this.defence = defence;
+        this.quickness = quickness;
+        this.power = power;
+        this.protection = protection;
+        this.focus = focus;
+        this.isAlive = isAlive;
         this.isEnemy = isEnemy;
     }
 
@@ -70,6 +84,10 @@ public abstract class Character {
 
     public double getStamina() {
         return stamina;
+    }
+
+    public double getMoney() {
+        return money;
     }
 
     public int getLevel() {
@@ -106,6 +124,14 @@ public abstract class Character {
 
     public int getFocus() {
         return focus;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public boolean isEnemy() {
+        return isEnemy;
     }
 
     /*
