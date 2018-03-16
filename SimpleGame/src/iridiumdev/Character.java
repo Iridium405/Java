@@ -98,6 +98,10 @@ public abstract class Character {
         return experience;
     }
 
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
     public int getExpGivenWhenDead() {
         return expGivenWhenDead;
     }
@@ -127,21 +131,26 @@ public abstract class Character {
     }
 
     public boolean isAlive() {
-        return isAlive;
+        if(this.hitPoints <= 0){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public boolean isEnemy() {
         return isEnemy;
     }
 
-    /*
-    Imię/nazwa
-    Punkty życia;
-    Punkty mana;
-    Punkty stamina;
-    Poziom;
-    Aktualne punkty doświadczenia;
-    Doświadczenie za zabicie;
-    Plecak;
-     */
+    public void levelChecking() {
+        if(this.experience >= 200 && this.experience < 400) {
+            this.level = 2;
+        } else if(this.experience >= 400 && this.experience < 800) {
+            this.level = 3;
+        } else if(this.experience >= 800 && this.experience < 1400) {
+            this.level = 4;
+        } else if(this.experience >= 1400 && this.experience < 2800) {
+            this.level = 5;
+        }
+    } //method levelChecking - checked.
 }
