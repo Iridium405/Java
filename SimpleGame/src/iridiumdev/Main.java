@@ -7,39 +7,53 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Player player = new Player("Dust",100,100,100, 250,5,5,
-                5,5,5,5);
-        player.levelChecking();
-        Enemy enemy_01 = Enemy.randomEnemy(player.getLevel(),dice(3));
+        Player player = new Player("Dust",100,100,100,1,0,
+                5,5,5,5,5,5);
+
         ArrayList<Character> actionQueue = new ArrayList<>();
+        Potion minorHealingPotion = new Potion("Minor Healing Potion",3,50,0);
 
-        System.out.println("Enemy: " + enemy_01.getName() + "\n");
-        System.out.println("  Initiative:");
-        actionOrder(player,enemy_01,actionQueue);
-        System.out.println("\n  Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
 
-        combat(actionQueue.get(0), actionQueue.get(1));
+        while(player.getLevel() <= 2 && player.isAlive()){
+            player.levelChecking();
+            Enemy enemy = Enemy.randomEnemy(player.getLevel(), dice(3));
+            System.out.println("                         Enemy: " + enemy.getName() + "\n");
+            System.out.println("  Initiative:");
+            actionOrder(player,enemy,actionQueue);
+            System.out.println("\n  Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
+
+            combat(actionQueue.get(0), actionQueue.get(1));
+
+            addExperience(player,enemy.getExpGivenWhenDead());
+            actionQueue.clear();
+            player.levelChecking();
+            System.out.println("Dust has " + player.getExperience() + "exp. and level " + player.getLevel() + "\n");
+            useHealingPotion(player,minorHealingPotion);
+        }
+
+
+
 
     }
 
     public static void combat(Character firstIn_ActionOrder, Character secondIn_ActionOrder){
 
         while(firstIn_ActionOrder.isAlive() || secondIn_ActionOrder.isAlive()) {
+
             double firstInAO_Damage = firstIn_ActionOrder.getStrength() + dice(6);
-            double secondInAO_CurrentHealth = secondIn_ActionOrder.getHitPoints() - firstInAO_Damage;
-            secondIn_ActionOrder.setHitPoints(secondInAO_CurrentHealth);
+            secondIn_ActionOrder.setHitPoints(secondIn_ActionOrder.getHitPoints() - firstInAO_Damage);
 
             System.out.println(firstIn_ActionOrder.getName() + " made " + firstInAO_Damage + " damage.");
             System.out.println(secondIn_ActionOrder.getName() + " has " + secondIn_ActionOrder.getHitPoints() + " health remained.\n");
 
             if(!secondIn_ActionOrder.isAlive()){
                 System.out.println(firstIn_ActionOrder.getName() + " won with " + firstIn_ActionOrder.getHitPoints() + " health remaining.");
+
                 break;
             }
 
             double secondInAO_Damage = secondIn_ActionOrder.getStrength() + dice(6);
-            double firstInAO_CurrentHealth = firstIn_ActionOrder.getHitPoints() - secondInAO_Damage;
-            firstIn_ActionOrder.setHitPoints(firstInAO_CurrentHealth);
+            firstIn_ActionOrder.setHitPoints(firstIn_ActionOrder.getHitPoints() - secondInAO_Damage);
 
             System.out.println(secondIn_ActionOrder.getName() + " made " + secondInAO_Damage + " damage.");
             System.out.println(firstIn_ActionOrder.getName() + " has " + firstIn_ActionOrder.getHitPoints() + " health remained.\n");
@@ -49,6 +63,7 @@ public class Main {
                 break;
             }
         }
+
         /*
         FiAO <strength lub power> dodane do <podstawowych obrażeń broni lub umiejętności> i <rzutu kostką>
         SiAO <defence lub protection>
@@ -86,10 +101,26 @@ public class Main {
         */
 
 
-    public static int dice(int numberOfWalls){
+    public static int dice(int numberOfSides){
         Random dice = new Random();
-        return dice.nextInt(numberOfWalls) +1;
+        return dice.nextInt(numberOfSides) +1;
     } // method tested.
+
+    public static void addExperience(Player player, int amount){
+        if(player.isAlive()){
+            player.setExperience(player.getExperience() + amount);
+            System.out.println(player.getName() + " received " + amount + "exp.");
+        } else if(!player.isAlive()){
+            System.out.println(player.getName() + " lost.");
+        }
+    }
+
+    public static void useHealingPotion(Player player, Potion potion) {
+        if(player.isAlive() && player.getHitPoints() < 50){
+            player.setHitPoints(player.getHitPoints() + potion.usePotion(potion));
+            System.out.println(potion.getName() + " used. "  + "Potions remained: " + potion.getQuantity() + "\n");
+        }
+    }
 
 
 

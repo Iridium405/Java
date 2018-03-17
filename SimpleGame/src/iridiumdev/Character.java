@@ -6,8 +6,6 @@ public abstract class Character {
     private double energy;
     private double stamina;
     private double money;
-    private int level;
-    private int experience;
     private int skillPoint;
     private int expGivenWhenDead;
     private int strength;
@@ -19,14 +17,12 @@ public abstract class Character {
     private boolean isAlive;
     private boolean isEnemy;
 
-    public Character(String name, double hitPoints, double energy, double stamina, int level, int experience, int skillPoint,
+    public Character(String name, double hitPoints, double energy, double stamina, int skillPoint,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.energy = energy;
         this.stamina = stamina;
-        this.level = level;
-        this.experience = experience;
         this.skillPoint = skillPoint;
         this.strength = strength;
         this.defence = defence;
@@ -104,18 +100,6 @@ public abstract class Character {
         return money;
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
-
     public int getSkillPoint() {
         return skillPoint;
     }
@@ -159,18 +143,6 @@ public abstract class Character {
     public boolean isEnemy() {
         return isEnemy;
     }
-
-    public void levelChecking() {
-        if(this.experience >= 200 && this.experience < 400) {
-            this.level = 2;
-        } else if(this.experience >= 400 && this.experience < 800) {
-            this.level = 3;
-        } else if(this.experience >= 800 && this.experience < 1400) {
-            this.level = 4;
-        } else if(this.experience >= 1400 && this.experience < 2800) {
-            this.level = 5;
-        }
-    } //USE after every combat(). / method tested.
 
     public int higherStat(int characterStat_1, int characterStat_2){
         if(characterStat_1 >= characterStat_2){

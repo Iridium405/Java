@@ -11,13 +11,13 @@ public class Enemy extends Character {
             case 1:
                 switch (random) {
                     case 1:
-                        Enemy enemyLv_01_1 = new Enemy("Goblin Marauder", 60, 0, 60, 20, 3, 2, 4, 1, 2, 1);
+                        Enemy enemyLv_01_1 = new Enemy("Goblin Marauder", 60, 0, 60, 40, 3, 2, 4, 1, 2, 1);
                         return enemyLv_01_1;
                     case 2:
-                        Enemy enemyLv_01_2 = new Enemy("Goblin Shaman", 50, 70, 20, 30, 1, 2, 1, 3, 2, 4);
+                        Enemy enemyLv_01_2 = new Enemy("Goblin Shaman", 50, 70, 20, 60, 1, 2, 1, 3, 2, 4);
                         return enemyLv_01_2;
                     case 3:
-                        Enemy enemyLv_01_3 = new Enemy("Goblin Assassin", 20, 50, 50, 40, 5, 2, 5, 5, 2, 5);
+                        Enemy enemyLv_01_3 = new Enemy("Goblin Assassin", 20, 50, 50, 80, 5, 2, 5, 5, 2, 5);
                         return enemyLv_01_3;
                     default:
                         return null;
@@ -25,13 +25,13 @@ public class Enemy extends Character {
             case 2:
                 switch (random) {
                     case 1:
-                        Enemy enemyLv_02_1 = new Enemy("Orc Impaler", 100, 20, 80, 40, 5, 5, 3, 2, 3, 2);
+                        Enemy enemyLv_02_1 = new Enemy("Orc Impaler", 100, 20, 80, 80, 5, 5, 3, 2, 3, 2);
                         return enemyLv_02_1;
                     case 2:
-                        Enemy enemyLv_02_2 = new Enemy("Orc Enchanter", 70, 120, 40, 60, 4, 4, 2, 6, 4, 5);
+                        Enemy enemyLv_02_2 = new Enemy("Orc Enchanter", 70, 120, 40, 120, 4, 4, 2, 6, 4, 5);
                         return enemyLv_02_2;
                     case 3:
-                        Enemy enemyLv_03_3 = new Enemy("Orc Berserker", 120, 100, 150, 100, 7, 1, 4, 3, 1, 1);
+                        Enemy enemyLv_03_3 = new Enemy("Orc Berserker", 120, 100, 150, 200, 7, 1, 4, 3, 1, 1);
                         return enemyLv_03_3;
                     default:
                         return null;
