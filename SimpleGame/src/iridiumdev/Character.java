@@ -8,6 +8,7 @@ public abstract class Character {
     private double money;
     private int level;
     private int experience;
+    private int skillPoint;
     private int expGivenWhenDead;
     private int strength;
     private int defence;
@@ -18,14 +19,15 @@ public abstract class Character {
     private boolean isAlive;
     private boolean isEnemy;
 
-    public Character(String name, double hitPoints, double energy, double stamina, int level, int experience, int strength,
-                     int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
+    public Character(String name, double hitPoints, double energy, double stamina, int level, int experience, int skillPoint,
+                     int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.energy = energy;
         this.stamina = stamina;
         this.level = level;
         this.experience = experience;
+        this.skillPoint = skillPoint;
         this.strength = strength;
         this.defence = defence;
         this.quickness = quickness;
@@ -98,6 +100,10 @@ public abstract class Character {
         return experience;
     }
 
+    public int getSkillPoint() {
+        return skillPoint;
+    }
+
     public void setExperience(int experience) {
         this.experience = experience;
     }
@@ -152,5 +158,13 @@ public abstract class Character {
         } else if(this.experience >= 1400 && this.experience < 2800) {
             this.level = 5;
         }
-    } //method levelChecking - checked.
+    } //USE after every combat(). / method tested.
+
+    public int higherStat(int characterStat_1, int characterStat_2){
+        if(characterStat_1 >= characterStat_2){
+            return characterStat_1;
+        } else {
+            return characterStat_2;
+        }
+    }
 }
