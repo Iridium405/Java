@@ -80,12 +80,24 @@ public abstract class Character {
         return hitPoints;
     }
 
+    public void setHitPoints(double hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
     public double getEnergy() {
         return energy;
     }
 
+    public void setEnergy(double energy) {
+        this.energy = energy;
+    }
+
     public double getStamina() {
         return stamina;
+    }
+
+    public void setStamina(double stamina) {
+        this.stamina = stamina;
     }
 
     public double getMoney() {
@@ -100,12 +112,12 @@ public abstract class Character {
         return experience;
     }
 
-    public int getSkillPoint() {
-        return skillPoint;
-    }
-
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public int getSkillPoint() {
+        return skillPoint;
     }
 
     public int getExpGivenWhenDead() {

@@ -7,20 +7,48 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Player player = new Player("Dust",100,100,100, 0,5,5,
-                4,5,5,4);
-        ArrayList<Character> actionQueue = new ArrayList<>();
+        Player player = new Player("Dust",100,100,100, 250,5,5,
+                5,5,5,5);
+        player.levelChecking();
         Enemy enemy_01 = Enemy.randomEnemy(player.getLevel(),dice(3));
+        ArrayList<Character> actionQueue = new ArrayList<>();
 
-        System.out.println(" Enemy: " + enemy_01.getName() + "\n");
+        System.out.println("Enemy: " + enemy_01.getName() + "\n");
+        System.out.println("  Initiative:");
         actionOrder(player,enemy_01,actionQueue);
-        System.out.println("\n Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1));
+        System.out.println("\n  Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
 
         combat(actionQueue.get(0), actionQueue.get(1));
 
     }
 
-    public static void combat(Character firstIn_ActionOrder, Character SecondIn_ActionOrder){
+    public static void combat(Character firstIn_ActionOrder, Character secondIn_ActionOrder){
+
+        while(firstIn_ActionOrder.isAlive() || secondIn_ActionOrder.isAlive()) {
+            double firstInAO_Damage = firstIn_ActionOrder.getStrength() + dice(6);
+            double secondInAO_CurrentHealth = secondIn_ActionOrder.getHitPoints() - firstInAO_Damage;
+            secondIn_ActionOrder.setHitPoints(secondInAO_CurrentHealth);
+
+            System.out.println(firstIn_ActionOrder.getName() + " made " + firstInAO_Damage + " damage.");
+            System.out.println(secondIn_ActionOrder.getName() + " has " + secondIn_ActionOrder.getHitPoints() + " health remained.\n");
+
+            if(!secondIn_ActionOrder.isAlive()){
+                System.out.println(firstIn_ActionOrder.getName() + " won with " + firstIn_ActionOrder.getHitPoints() + " health remaining.");
+                break;
+            }
+
+            double secondInAO_Damage = secondIn_ActionOrder.getStrength() + dice(6);
+            double firstInAO_CurrentHealth = firstIn_ActionOrder.getHitPoints() - secondInAO_Damage;
+            firstIn_ActionOrder.setHitPoints(firstInAO_CurrentHealth);
+
+            System.out.println(secondIn_ActionOrder.getName() + " made " + secondInAO_Damage + " damage.");
+            System.out.println(firstIn_ActionOrder.getName() + " has " + firstIn_ActionOrder.getHitPoints() + " health remained.\n");
+
+            if(!firstIn_ActionOrder.isAlive()){
+                System.out.println(secondIn_ActionOrder.getName() +" won with " + secondIn_ActionOrder.getHitPoints() + " health remaining.");
+                break;
+            }
+        }
         /*
         FiAO <strength lub power> dodane do <podstawowych obrażeń broni lub umiejętności> i <rzutu kostką>
         SiAO <defence lub protection>
@@ -49,10 +77,12 @@ public class Main {
 
         /*
         - Zmienić actionOrder() -> po pierwszym rzucie kością każdej ze stron, ta która rzuciła więcej wybiera swój lepszy
-        atrybut (Quickness vs Focus), który użyją obie strony przy drugim rzucie, który to dopiero rzut ostatecznie ustali kolejność!
+            atrybut (Quickness vs Focus), który użyją obie strony przy drugim rzucie, który to dopiero rzut ostatecznie ustali kolejność!
+
+        - Dwukrotna przewaga inicjatywy będzie skutkować dodatkowym atakiem w turze (lub dodatkowymi obrażeniami, np. +50%).
 
         - Dodać metodę sprawdzającą, czy char_1 jest pierwszy na liście.
-        Jeśli nie jest, wtedy char_2 używa combat() jako pierwszy.
+            Jeśli nie jest, wtedy char_2 używa combat() jako pierwszy.
         */
 
 
