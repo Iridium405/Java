@@ -20,10 +20,10 @@ public class Potion extends Item {
     }
 
     public int usePotion(Potion potion){
-        if(potion.increaseBy >= 1){
+        if(potion.getQuantity()>= 1 && potion.increaseBy >= 1){
             potion.setQuantity(potion.getQuantity() - 1);
             return increaseBy;
-        } if(potion.decreaseBy >= 1){
+        } if(potion.getQuantity()>= 1 && potion.decreaseBy >= 1){
             potion.setQuantity(potion.getQuantity() - 1);
             return decreaseBy;
         } else {

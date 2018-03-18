@@ -1,5 +1,7 @@
 package iridiumdev;
 
+import java.util.ArrayList;
+
 public abstract class Character {
     private String name;
     private double hitPoints;
@@ -150,5 +152,7 @@ public abstract class Character {
         } else {
             return characterStat_2;
         }
-    }
+    } // method tested.
+
+    ArrayList<Potion> equipment = new ArrayList<Potion>();                                                               //TODO -> Utworzyć listę generyczną!
 }

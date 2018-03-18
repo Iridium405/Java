@@ -11,62 +11,74 @@ public class Main {
                 5,5,5,5,5,5);
 
         ArrayList<Character> actionQueue = new ArrayList<>();
-        Potion minorHealingPotion = new Potion("Minor Healing Potion",3,50,0);
 
+        Potion minorHealingPotion = new Potion("Minor Healing Potion",4,50,0);
+        player.equipment.add(minorHealingPotion);
 
         while(player.getLevel() <= 2 && player.isAlive()){
             player.levelChecking();
+
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), dice(3));
-            System.out.println("                         Enemy: " + enemy.getName() + "\n");
-            System.out.println("  Initiative:");
+
+            System.out.println("\n                         Enemy: " + enemy.getName() + "\n");
+            System.out.println("   Initiative:");
+
             actionOrder(player,enemy,actionQueue);
-            System.out.println("\n  Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
+
+            System.out.println("\n   Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
+            System.out.println("\n   BATTLE LOG: \n");
 
             combat(actionQueue.get(0), actionQueue.get(1));
 
             addExperience(player,enemy.getExpGivenWhenDead());
             actionQueue.clear();
             player.levelChecking();
-            System.out.println("Dust has " + player.getExperience() + "exp. and level " + player.getLevel() + "\n");
-            useHealingPotion(player,minorHealingPotion);
+
+            System.out.println(player.getName() + " has " + player.getExperience() + "exp. and level " + player.getLevel() + "\n");
         }
-
-
-
 
     }
 
-    public static void combat(Character firstIn_ActionOrder, Character secondIn_ActionOrder){
+    public static void combat(Character higherIniciative, Character lowerIniciative){
 
-        while(firstIn_ActionOrder.isAlive() || secondIn_ActionOrder.isAlive()) {
+        while(higherIniciative.isAlive() || lowerIniciative.isAlive()) {
 
-            double firstInAO_Damage = firstIn_ActionOrder.getStrength() + dice(6);
-            secondIn_ActionOrder.setHitPoints(secondIn_ActionOrder.getHitPoints() - firstInAO_Damage);
+            double higherIniciativeDamage = higherIniciative.getStrength() + dice(6); // + weapon.getDamage()
+            lowerIniciative.setHitPoints(lowerIniciative.getHitPoints() - higherIniciativeDamage);
 
-            System.out.println(firstIn_ActionOrder.getName() + " made " + firstInAO_Damage + " damage.");
-            System.out.println(secondIn_ActionOrder.getName() + " has " + secondIn_ActionOrder.getHitPoints() + " health remained.\n");
+            System.out.println(higherIniciative.getName() + " made " + higherIniciativeDamage + " damage.");
+            System.out.println(lowerIniciative.getName() + " has " + lowerIniciative.getHitPoints() + " HP remained.\n");
 
-            if(!secondIn_ActionOrder.isAlive()){
-                System.out.println(firstIn_ActionOrder.getName() + " won with " + firstIn_ActionOrder.getHitPoints() + " health remaining.");
+            if(lowerIniciative.equipment.size()>0 && !lowerIniciative.isEnemy()){
+                useHealingPotion(lowerIniciative, lowerIniciative.equipment.get(0));
+                checkingEquipment(lowerIniciative, lowerIniciative.equipment.get(0));
+            }
 
+            if(!lowerIniciative.isAlive()){
+                System.out.println(higherIniciative.getName() + " won with " + higherIniciative.getHitPoints() + " HP remaining.");
                 break;
             }
 
-            double secondInAO_Damage = secondIn_ActionOrder.getStrength() + dice(6);
-            firstIn_ActionOrder.setHitPoints(firstIn_ActionOrder.getHitPoints() - secondInAO_Damage);
+            double lowerIniciativeDamage = lowerIniciative.getStrength() + dice(6);
+            higherIniciative.setHitPoints(higherIniciative.getHitPoints() - lowerIniciativeDamage);
 
-            System.out.println(secondIn_ActionOrder.getName() + " made " + secondInAO_Damage + " damage.");
-            System.out.println(firstIn_ActionOrder.getName() + " has " + firstIn_ActionOrder.getHitPoints() + " health remained.\n");
+            System.out.println(lowerIniciative.getName() + " made " + lowerIniciativeDamage + " damage.");
+            System.out.println(higherIniciative.getName() + " has " + higherIniciative.getHitPoints() + " HP remained.\n");
 
-            if(!firstIn_ActionOrder.isAlive()){
-                System.out.println(secondIn_ActionOrder.getName() +" won with " + secondIn_ActionOrder.getHitPoints() + " health remaining.");
+            if(higherIniciative.equipment.size()>0 && !higherIniciative.isEnemy()) {
+                useHealingPotion(higherIniciative, higherIniciative.equipment.get(0));
+                checkingEquipment(higherIniciative, higherIniciative.equipment.get(0));
+            }
+
+            if(!higherIniciative.isAlive()){
+                System.out.println(lowerIniciative.getName() +" won with " + lowerIniciative.getHitPoints() + " HP remaining.");
                 break;
             }
         }
 
         /*
-        FiAO <strength lub power> dodane do <podstawowych obrażeń broni lub umiejętności> i <rzutu kostką>
-        SiAO <defence lub protection>
+        HigherInit <strength lub power> dodane do <podstawowych obrażeń broni lub umiejętności> i <rzutu kostką>
+        LowerInit <defence lub protection> ?
          */
     }
 
@@ -91,13 +103,11 @@ public class Main {
     }
 
         /*
-        - Zmienić actionOrder() -> po pierwszym rzucie kością każdej ze stron, ta która rzuciła więcej wybiera swój lepszy
-            atrybut (Quickness vs Focus), który użyją obie strony przy drugim rzucie, który to dopiero rzut ostatecznie ustali kolejność!
+        - Zmienić actionOrder() -> każda strona rzuca d6, ta która rzuciła więcej wybiera swój lepszy atrybut
+            (Quickness vs Focus). Obie strony użyją wybranego przez zwycięzcę pierwszego rzutu jako modyfikator przy drugim rzucie.
+            Drugi rzut + modyfikator decydują o kolejności.
 
-        - Dwukrotna przewaga inicjatywy będzie skutkować dodatkowym atakiem w turze (lub dodatkowymi obrażeniami, np. +50%).
-
-        - Dodać metodę sprawdzającą, czy char_1 jest pierwszy na liście.
-            Jeśli nie jest, wtedy char_2 używa combat() jako pierwszy.
+        - Dwukrotna przewaga wartości inicjatywy będzie skutkować dodatkowym atakiem w turze (lub dodatkowymi obrażeniami, np. +50%).
         */
 
 
@@ -113,17 +123,21 @@ public class Main {
         } else if(!player.isAlive()){
             System.out.println(player.getName() + " lost.");
         }
-    }
+    } // method tested.
 
-    public static void useHealingPotion(Player player, Potion potion) {
+    public static void useHealingPotion(Character player, Potion potion) {
         if(player.isAlive() && player.getHitPoints() < 50){
             player.setHitPoints(player.getHitPoints() + potion.usePotion(potion));
-            System.out.println(potion.getName() + " used. "  + "Potions remained: " + potion.getQuantity() + "\n");
+            System.out.println(potion.getName() + " used. " + player.getName() + " has " + player.getHitPoints() +
+                    " HP. Potions remained: " + potion.getQuantity() + "\n");
         }
     }
 
-
-
+    public static void checkingEquipment(Character player, Potion potion){
+        if(potion.getQuantity() == 0){
+            player.equipment.remove(0);
+        }
+    }                                           //TODO -> wprowadzić >wyszukiwanie< Itemu, którego ilość = 0 i usuwanie go z listy. (Najpierw lista generyczna!)
 
 }
 

@@ -39,5 +39,5 @@ public class Enemy extends Character {
 
             default: return null;
         }
-    }
+    } // method tested.
 }

@@ -1,5 +1,7 @@
 package iridiumdev;
 
+import java.util.ArrayList;
+
 public class Player extends Character {
     private int level;
     private int experience;
@@ -39,6 +41,8 @@ public class Player extends Character {
             this.level = 5;
         }
     } //USE after every combat(). / method tested.
+
+
 
 
 }
