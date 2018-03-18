@@ -2,7 +2,7 @@ package iridiumdev;
 
 public class Enemy extends Character {
 
-    public Enemy(String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength, int defence, int quickness, int power, int protection, int focus) {
+    public Enemy(String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength, int defence, int quickness, int power, int protection, int focus) {
         super(true, name, hitPoints, energy, stamina, expGivenWhenDead, strength, defence, quickness, power, protection, focus, true);
     }
 

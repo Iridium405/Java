@@ -1,12 +1,10 @@
 package iridiumdev;
 
-import java.util.ArrayList;
-
 public class Player extends Character {
     private int level;
     private int experience;
 
-    public Player(String name, double hitPoints, double energy, double stamina, int level, int experience, int strength, int defence, int quickness, int power, int protection, int focus) {
+    public Player(String name, int hitPoints, int energy, int stamina, int level, int experience, int strength, int defence, int quickness, int power, int protection, int focus) {
         super(name, hitPoints, energy, stamina, 2, strength, defence, quickness, power, protection, focus, true);
         this.level = level;
         this.experience = experience;

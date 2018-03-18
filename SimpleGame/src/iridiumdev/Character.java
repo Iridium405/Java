@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public abstract class Character {
     private String name;
-    private double hitPoints;
-    private double energy;
-    private double stamina;
-    private double money;
+    private int hitPoints;
+    private int energy;
+    private int stamina;
+    private int money;
     private int skillPoint;
     private int expGivenWhenDead;
     private int strength;
@@ -19,7 +19,7 @@ public abstract class Character {
     private boolean isAlive;
     private boolean isEnemy;
 
-    public Character(String name, double hitPoints, double energy, double stamina, int skillPoint,
+    public Character(String name, int hitPoints, int energy, int stamina, int skillPoint,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
@@ -35,7 +35,7 @@ public abstract class Character {
         this.isAlive = isAlive;
     }
 
-    public Character(boolean isEnemy, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
+    public Character(boolean isEnemy, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.isAlive = isAlive;
         this.name = name;
@@ -52,7 +52,7 @@ public abstract class Character {
         this.isEnemy = isEnemy;
     }
 
-    public Character(double money, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
+    public Character(int money, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive, boolean isEnemy) {
         this.name = name;
         this.hitPoints = hitPoints;
@@ -70,35 +70,37 @@ public abstract class Character {
         this.isEnemy = isEnemy;
     }
 
+    ArrayList<Item> equipment = new ArrayList<Item>();
+
     public String getName() {
         return name;
     }
 
-    public double getHitPoints() {
+    public int getHitPoints() {
         return hitPoints;
     }
 
-    public void setHitPoints(double hitPoints) {
+    public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
 
-    public double getEnergy() {
+    public int getEnergy() {
         return energy;
     }
 
-    public void setEnergy(double energy) {
+    public void setEnergy(int energy) {
         this.energy = energy;
     }
 
-    public double getStamina() {
+    public int getStamina() {
         return stamina;
     }
 
-    public void setStamina(double stamina) {
+    public void setStamina(int stamina) {
         this.stamina = stamina;
     }
 
-    public double getMoney() {
+    public int getMoney() {
         return money;
     }
 
@@ -153,6 +155,4 @@ public abstract class Character {
             return characterStat_2;
         }
     } // method tested.
-
-    ArrayList<Potion> equipment = new ArrayList<Potion>();                                                               //TODO -> Utworzyć listę generyczną!
 }
