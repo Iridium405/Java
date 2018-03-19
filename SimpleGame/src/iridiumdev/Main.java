@@ -12,10 +12,13 @@ public class Main {
 
         ArrayList<Character> actionQueue = new ArrayList<>();
 
-        Item minorHealingPotion = new Potion("Minor Healing Potion",4,50,0);
-        player.equipment.add(minorHealingPotion);
+        Potion minorHealingPotion = new Potion("Minor Healing Potion",50,0);
+        player.equipment.addPotion(minorHealingPotion,5);
 
-        while(player.getLevel() <= 2 && player.isAlive()){
+        Weapon longSword = new Weapon("Excellent Long Sword",9,12);
+        player.equipment.addWeapon(longSword);
+
+        while(player.getLevel() <= 3 && player.isAlive()){
             player.levelChecking();
 
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), dice(3));
@@ -28,7 +31,7 @@ public class Main {
             System.out.println("\n   Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
             System.out.println("\n   BATTLE LOG: \n");
 
-            combat(actionQueue.get(0), actionQueue.get(1));
+            combat(actionQueue.get(0),actionQueue.get(1),player.equipment.getWeapon(0));
 
             addExperience(player,enemy.getExpGivenWhenDead());
             actionQueue.clear();
@@ -40,20 +43,26 @@ public class Main {
 
     }
 
-    public static void combat(Character higherInitiative, Character lowerInitiative){
+    public static void combat(Character higherInitiative, Character lowerInitiative, Weapon playerWeapon){
+
 
         while(higherInitiative.isAlive() || lowerInitiative.isAlive()) {
 
-            int higherInitiativeDamage = higherInitiative.getStrength() + dice(6); // + weapon.getDamage()
-            lowerInitiative.setHitPoints(lowerInitiative.getHitPoints() - higherInitiativeDamage);
+                int weaponDamage = 0;
+                if(!higherInitiative.isEnemy()){
+                    weaponDamage = playerWeapon.makeDamage();
+                }
+                int higherInitiativeDamage = higherInitiative.getStrength() + weaponDamage + dice(6);
+                lowerInitiative.setHitPoints(lowerInitiative.getHitPoints() - higherInitiativeDamage);
 
-            System.out.println(higherInitiative.getName() + " made " + higherInitiativeDamage + " damage.");
-            System.out.println(lowerInitiative.getName() + " has " + lowerInitiative.getHitPoints() +
-                    " HP remaining.\n");
+                System.out.println(higherInitiative.getName() + " made " + higherInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                System.out.println(lowerInitiative.getName() + " has " + lowerInitiative.getHitPoints() +
+                        " HP remaining.\n");
 
-            if(lowerInitiative.equipment.size()>0 && !lowerInitiative.isEnemy()){
-                usePotion(lowerInitiative,"HitPoints",lowerInitiative.equipment.get(0));
-                checkingEquipment(lowerInitiative, lowerInitiative.equipment.get(0));
+
+            if(lowerInitiative.equipment.sizeOfPotionEquipment() > 0 && !lowerInitiative.isEnemy()){
+                usePotion(lowerInitiative,"HitPoints", lowerInitiative.equipment.getPotion(0));
+                checkingPotionEquipment(lowerInitiative, lowerInitiative.equipment.getPotion(0));
             }
 
             if(!lowerInitiative.isAlive()){
@@ -61,17 +70,21 @@ public class Main {
                         " HP remaining.");
                 break;
             }
+                weaponDamage = 0;
+                if(!lowerInitiative.isEnemy()){
+                    weaponDamage = playerWeapon.makeDamage();
+                }
+                int lowerInitiativeDamage = lowerInitiative.getStrength() + weaponDamage + dice(6);
+                higherInitiative.setHitPoints(higherInitiative.getHitPoints() - lowerInitiativeDamage);
 
-            int lowerInitiativeDamage = lowerInitiative.getStrength() + dice(6);
-            higherInitiative.setHitPoints(higherInitiative.getHitPoints() - lowerInitiativeDamage);
+                System.out.println(lowerInitiative.getName() + " made " + lowerInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                System.out.println(higherInitiative.getName() + " has " + higherInitiative.getHitPoints() +
+                        " HP remaining.\n");
 
-            System.out.println(lowerInitiative.getName() + " made " + lowerInitiativeDamage + " damage.");
-            System.out.println(higherInitiative.getName() + " has " + higherInitiative.getHitPoints() +
-                    " HP remaining.\n");
 
-            if(higherInitiative.equipment.size()>0 && !higherInitiative.isEnemy()) {
-                usePotion(higherInitiative,"HitPoints",higherInitiative.equipment.get(0));
-                checkingEquipment(higherInitiative, higherInitiative.equipment.get(0));
+            if(higherInitiative.equipment.sizeOfPotionEquipment() > 0 && !higherInitiative.isEnemy()) {
+                usePotion(higherInitiative,"HitPoints", higherInitiative.equipment.getPotion(0));
+                checkingPotionEquipment(higherInitiative, higherInitiative.equipment.getPotion(0));
             }
 
             if(!higherInitiative.isAlive()){
@@ -108,7 +121,7 @@ public class Main {
     }
 
         /*
-        - Zmienić actionOrder() -> każda strona rzuca d6, ta która rzuciła więcej wybiera swój lepszy atrybut
+        -? Zmienić actionOrder() -> każda strona rzuca d6, ta która rzuciła więcej wybiera swój lepszy atrybut
             (Quickness vs Focus). Obie strony użyją wybranego przez zwycięzcę pierwszego rzutu jako modyfikator
             przy drugim rzucie. Drugi rzut + modyfikator decydują o kolejności.
 
@@ -125,25 +138,33 @@ public class Main {
     public static void addExperience(Player player, int amount){
         if(player.isAlive()){
             player.setExperience(player.getExperience() + amount);
-            System.out.println(player.getName() + " received " + amount + "exp.");
+            System.out.println(player.getName() + " received " + amount + " exp.");
         } else if(!player.isAlive()){
             System.out.println(player.getName() + " lost.");
         }
     } // method tested.
 
-    public static void usePotion(Character player, String attributeAffected, Item potion) {
+    public static void usePotion(Character player, String attributeAffected, Potion potion) {
         if(player.isAlive() && attributeAffected.equals("HitPoints") && player.getHitPoints() < 50){
             player.setHitPoints(player.getHitPoints() + potion.usePotion(potion));
             System.out.println(potion.getName() + " used. " + player.getName() + " has " + player.getHitPoints() +
                     " HP. Potions remained: " + potion.getQuantity() + "\n");
+        } if(player.isAlive() && attributeAffected.equals("Energy") && player.getEnergy() < 20) {
+            player.setEnergy(player.getEnergy() + potion.usePotion(potion));
+            System.out.println(potion.getName() + " used. " + player.getName() + " has " + player.getEnergy() +
+                    " energy. Potions remained: " + potion.getQuantity() + "\n");
+        } if(player.isAlive() && attributeAffected.equals("Stamina") && player.getStamina() < 20) {
+            player.setStamina(player.getStamina() + potion.usePotion(potion));
+            System.out.println(potion.getName() + " used. " + player.getName() + " has " + player.getStamina() +
+                    " stamina. Potions remained: " + potion.getQuantity() + "\n");
         }
     }
 
-    public static void checkingEquipment(Character player, Item item){
-        if(item.getQuantity() == 0){
-            player.equipment.remove(0);
+    public static void checkingPotionEquipment(Character player, Potion potion ){
+        if(potion.getQuantity() == 0){
+            player.equipment.removePotion(0);
         }
-    }                                               //TODO -> wprowadzić >wyszukiwanie< Itemu, którego ilość = 0 i usuwanie go z listy.
+    }
 
 }
 

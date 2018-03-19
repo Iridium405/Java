@@ -70,7 +70,7 @@ public abstract class Character {
         this.isEnemy = isEnemy;
     }
 
-    ArrayList<Item> equipment = new ArrayList<Item>();
+    Equipment equipment = new Equipment();
 
     public String getName() {
         return name;
