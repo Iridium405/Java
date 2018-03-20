@@ -18,6 +18,7 @@ public abstract class Character {
     private int focus;
     private boolean isAlive;
     private boolean isEnemy;
+    // private double money/coins;
 
     public Character(String name, int hitPoints, int energy, int stamina, int skillPoint,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {

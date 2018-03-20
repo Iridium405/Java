@@ -29,13 +29,13 @@ public class Player extends Character {
     public void levelChecking() {
         if(this.experience >= 0 && this.experience < 200) {
             this.level = 1;
-        } else if(this.experience >= 200 && this.experience < 400) {
+        } else if(this.experience >= 200 && this.experience < 600) {
             this.level = 2;
-        } else if(this.experience >= 400 && this.experience < 800) {
+        } else if(this.experience >= 600 && this.experience < 1200) {
             this.level = 3;
-        } else if(this.experience >= 800 && this.experience < 1400) {
+        } else if(this.experience >= 1200 && this.experience < 2000) {
             this.level = 4;
-        } else if(this.experience >= 1400 && this.experience < 2800) {
+        } else if(this.experience >= 2000 && this.experience < 3000) {
             this.level = 5;
         }
     } //USE after every combat(). / method tested.

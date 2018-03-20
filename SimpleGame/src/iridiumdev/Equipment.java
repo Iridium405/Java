@@ -66,3 +66,7 @@ public class Equipment {
     }
 
 }
+
+/*
+Zrobić metodę randomowych przedmiotów klasy Weapon, które otrzymywaliby przeciwnicy do walki.
+ */

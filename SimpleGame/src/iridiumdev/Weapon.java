@@ -7,6 +7,7 @@ public class Weapon {
     private int quantity;
     private int minDamage;
     private int maxDamage;
+    //private double value;
 
     public Weapon(String name, int minDamage, int maxDamage) {
         this.name = name;

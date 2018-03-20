@@ -54,3 +54,5 @@ public class Enemy extends Character {
         }
     } // method tested.
 }
+
+//Pierwsza umiejętność: Vampire Bloodsucker - zabranie HP gracza i dodanie ich sobie.

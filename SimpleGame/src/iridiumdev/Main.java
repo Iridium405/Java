@@ -7,21 +7,25 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         Player player = new Player("Dust",100,100,100,1,0,
                 5,5,5,5,5,5);
 
-        ArrayList<Character> actionQueue = new ArrayList<>();
+        Weapon longSword = new Weapon("Excellent Long Sword",9,12);
+        player.equipment.addWeapon(longSword);
 
         Potion minorHealingPotion = new Potion("Minor Healing Potion",50,0);
         player.equipment.addPotion(minorHealingPotion,5);
 
-        Weapon longSword = new Weapon("Excellent Long Sword",9,12);
-        player.equipment.addWeapon(longSword);
+        ArrayList<Character> actionQueue = new ArrayList<>();
+
 
         while(player.getLevel() <= 3 && player.isAlive()){
             player.levelChecking();
 
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), dice(3));
+            //TODO: enemy.equipment.addWeapon(randomWeapon); -> randomowa broń dla przeciwnika - modyfikator ataku
+            //TODO: enemy.equipment.addArmour(randomArmour); -> randomowe uzbrojenie dla przeciwnika - modyfikator obrony
 
             System.out.println("\n                         Enemy: " + enemy.getName() + "\n");
             System.out.println("   Initiative:");
@@ -31,64 +35,66 @@ public class Main {
             System.out.println("\n   Action order: \n" + actionQueue.get(0) + "\n" + actionQueue.get(1) + "\n");
             System.out.println("\n   BATTLE LOG: \n");
 
-            combat(actionQueue.get(0),actionQueue.get(1),player.equipment.getWeapon(0));
+            combat(actionQueue.get(0),actionQueue.get(1));
 
             addExperience(player,enemy.getExpGivenWhenDead());
             actionQueue.clear();
             player.levelChecking();
 
-            System.out.println(player.getName() + " has " + player.getExperience() + "exp and level "
-                    + player.getLevel() + "\n");
+            System.out.println(player.getName() + " has " + player.getExperience() + " exp and level "
+                    + player.getLevel() + ".\n");
         }
 
     }
 
-    public static void combat(Character higherInitiative, Character lowerInitiative, Weapon playerWeapon){
+    public static void combat(Character highInit, Character lowInit){
 
 
-        while(higherInitiative.isAlive() || lowerInitiative.isAlive()) {
+        while(highInit.isAlive() || lowInit.isAlive()) {
 
                 int weaponDamage = 0;
-                if(!higherInitiative.isEnemy()){
-                    weaponDamage = playerWeapon.makeDamage();
+                if(!highInit.isEnemy()){
+                    weaponDamage = highInit.equipment.getWeapon(0).makeDamage();
                 }
-                int higherInitiativeDamage = higherInitiative.getStrength() + weaponDamage + dice(6);
-                lowerInitiative.setHitPoints(lowerInitiative.getHitPoints() - higherInitiativeDamage);
 
-                System.out.println(higherInitiative.getName() + " made " + higherInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
-                System.out.println(lowerInitiative.getName() + " has " + lowerInitiative.getHitPoints() +
+                int higherInitiativeDamage = highInit.getStrength() + weaponDamage + dice(6);
+                lowInit.setHitPoints(lowInit.getHitPoints() - higherInitiativeDamage);
+
+                System.out.println(highInit.getName() + " made " + higherInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                System.out.println(lowInit.getName() + " has " + lowInit.getHitPoints() +
                         " HP remaining.\n");
 
-
-            if(lowerInitiative.equipment.sizeOfPotionEquipment() > 0 && !lowerInitiative.isEnemy()){
-                usePotion(lowerInitiative,"HitPoints", lowerInitiative.equipment.getPotion(0));
-                checkingPotionEquipment(lowerInitiative, lowerInitiative.equipment.getPotion(0));
+            if(lowInit.equipment.sizeOfPotionEquipment() > 0 && !lowInit.isEnemy()){
+                usePotion(lowInit,"HitPoints", lowInit.equipment.getPotion(0));
+                checkingPotionEquipment(lowInit, lowInit.equipment.getPotion(0));
             }
 
-            if(!lowerInitiative.isAlive()){
-                System.out.println(higherInitiative.getName() + " won with " + higherInitiative.getHitPoints() +
+
+            if(!lowInit.isAlive()){
+                System.out.println(highInit.getName() + " won with " + highInit.getHitPoints() +
                         " HP remaining.");
                 break;
             }
                 weaponDamage = 0;
-                if(!lowerInitiative.isEnemy()){
-                    weaponDamage = playerWeapon.makeDamage();
+                if(!lowInit.isEnemy()){
+                    weaponDamage = lowInit.equipment.getWeapon(0).makeDamage();
                 }
-                int lowerInitiativeDamage = lowerInitiative.getStrength() + weaponDamage + dice(6);
-                higherInitiative.setHitPoints(higherInitiative.getHitPoints() - lowerInitiativeDamage);
 
-                System.out.println(lowerInitiative.getName() + " made " + lowerInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
-                System.out.println(higherInitiative.getName() + " has " + higherInitiative.getHitPoints() +
+                int lowerInitiativeDamage = lowInit.getStrength() + weaponDamage + dice(6);
+                highInit.setHitPoints(highInit.getHitPoints() - lowerInitiativeDamage);
+
+                System.out.println(lowInit.getName() + " made " + lowerInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                System.out.println(highInit.getName() + " has " + highInit.getHitPoints() +
                         " HP remaining.\n");
 
 
-            if(higherInitiative.equipment.sizeOfPotionEquipment() > 0 && !higherInitiative.isEnemy()) {
-                usePotion(higherInitiative,"HitPoints", higherInitiative.equipment.getPotion(0));
-                checkingPotionEquipment(higherInitiative, higherInitiative.equipment.getPotion(0));
+            if(highInit.equipment.sizeOfPotionEquipment() > 0 && !highInit.isEnemy()) {
+                usePotion(highInit,"HitPoints", highInit.equipment.getPotion(0));
+                checkingPotionEquipment(highInit, highInit.equipment.getPotion(0));
             }
 
-            if(!higherInitiative.isAlive()){
-                System.out.println(lowerInitiative.getName() +" won with " + lowerInitiative.getHitPoints() +
+            if(!highInit.isAlive()){
+                System.out.println(lowInit.getName() +" won with " + lowInit.getHitPoints() +
                         " HP remaining.");
                 break;
             }
@@ -168,6 +174,9 @@ public class Main {
 
 }
 
+/*
+Generator losowych wydarzeń -> Spotkanie przeciwnika, spotkanie NPC, znalezienie przedmiotu.
+ */
 
 /*
         Walka:
