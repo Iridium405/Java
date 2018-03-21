@@ -4,13 +4,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Weapon {
     private String name;
+    private String type;
     private int quantity;
     private int minDamage;
     private int maxDamage;
-    //private double value;
+    //TODO: private double value;
 
     public Weapon(String name, int minDamage, int maxDamage) {
         this.name = name;
+        this.type = "Weapon";
         this.quantity = 1;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
@@ -18,6 +20,10 @@ public class Weapon {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public int getQuantity() {
@@ -32,7 +38,7 @@ public class Weapon {
         return maxDamage;
     }
 
-    public int makeDamage(){
+    public int makeDamage(){ //makeDamage - atak fizyczny VS. conjureDamage - atak energetyczny
         return ThreadLocalRandom.current().nextInt(this.minDamage,this.maxDamage +1);
     }
 }

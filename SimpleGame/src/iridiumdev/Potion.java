@@ -7,7 +7,7 @@ public class Potion{
     private int quantity;
     private int increaseBy;
     private int decreaseBy;
-    //private double value;
+    //TODO: private double value;
 
     public Potion(String name, int increaseBy, int decreaseBy) {
         this.name = name;

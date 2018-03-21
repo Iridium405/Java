@@ -12,10 +12,23 @@ public class Main {
                 5,5,5,5,5,5);
 
         Weapon longSword = new Weapon("Excellent Long Sword",9,12);
+        Weapon shortsword = new Weapon("Short sword", 2,4);
+        Weapon axe = new Weapon("Axe", 4,5);
         player.equipment.addWeapon(longSword);
+        player.equipment.addWeapon(shortsword);
+        player.equipment.addWeapon(axe);
+
+        Armour armour1 = new Armour("Magic Robe", 1,10);
+        Armour armour2 = new Armour("Chainmail", 10,2);
+        player.equipment.addArmour(armour1);
+        player.equipment.addArmour(armour2);
+
+        Weapon woodenClaws = new Weapon("Wooden Claws",1,4);
 
         Potion minorHealingPotion = new Potion("Minor Healing Potion",50,0);
-        player.equipment.addPotion(minorHealingPotion,5);
+        player.equipment.addPotion(minorHealingPotion,10);
+
+        player.equipment.inventoryContent();
 
         ArrayList<Character> actionQueue = new ArrayList<>();
 
@@ -24,8 +37,12 @@ public class Main {
             player.levelChecking();
 
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), dice(3));
-            //TODO: enemy.equipment.addWeapon(randomWeapon); -> randomowa broń dla przeciwnika - modyfikator ataku
-            //TODO: enemy.equipment.addArmour(randomArmour); -> randomowe uzbrojenie dla przeciwnika - modyfikator obrony
+            enemy.equipment.addWeapon(woodenClaws);
+
+            /*
+            TODO: enemy.equipment.addWeapon(randomWeapon); -> randomowa broń dla przeciwnika - modyfikator ataku
+            TODO: enemy.equipment.addArmour(randomArmour); -> randomowe uzbrojenie dla przeciwnika - modyfikator obrony
+            */
 
             System.out.println("\n                         Enemy: " + enemy.getName() + "\n");
             System.out.println("   Initiative:");
@@ -42,7 +59,7 @@ public class Main {
             player.levelChecking();
 
             System.out.println(player.getName() + " has " + player.getExperience() + " exp and level "
-                    + player.getLevel() + ".\n");
+                    + player.getLevel() + ".\n---------------------------------------------------\n");
         }
 
     }
@@ -52,15 +69,13 @@ public class Main {
 
         while(highInit.isAlive() || lowInit.isAlive()) {
 
-                int weaponDamage = 0;
-                if(!highInit.isEnemy()){
-                    weaponDamage = highInit.equipment.getWeapon(0).makeDamage();
-                }
+                int weaponDamage = highInit.equipment.getWeapon(0).makeDamage();
 
-                int higherInitiativeDamage = highInit.getStrength() + weaponDamage + dice(6);
-                lowInit.setHitPoints(lowInit.getHitPoints() - higherInitiativeDamage);
+                int highInitDamage = highInit.getStrength() + weaponDamage + dice(6);
+                lowInit.setHitPoints(lowInit.getHitPoints() - highInitDamage);
 
-                System.out.println(highInit.getName() + " made " + higherInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                System.out.println(highInit.getName() + " made " + highInitDamage + " damage [" + weaponDamage
+                        + " using " + highInit.equipment.getWeapon(0).getName() + "]");
                 System.out.println(lowInit.getName() + " has " + lowInit.getHitPoints() +
                         " HP remaining.\n");
 
@@ -75,15 +90,14 @@ public class Main {
                         " HP remaining.");
                 break;
             }
-                weaponDamage = 0;
-                if(!lowInit.isEnemy()){
-                    weaponDamage = lowInit.equipment.getWeapon(0).makeDamage();
-                }
 
-                int lowerInitiativeDamage = lowInit.getStrength() + weaponDamage + dice(6);
-                highInit.setHitPoints(highInit.getHitPoints() - lowerInitiativeDamage);
+                weaponDamage = lowInit.equipment.getWeapon(0).makeDamage();
 
-                System.out.println(lowInit.getName() + " made " + lowerInitiativeDamage + " damage [" + weaponDamage + " using weapon]");
+                int lowInitDamage = lowInit.getStrength() + weaponDamage + dice(6);
+                highInit.setHitPoints(highInit.getHitPoints() - lowInitDamage);
+
+                System.out.println(lowInit.getName() + " made " + lowInitDamage + " damage [" + weaponDamage
+                        + " using " + lowInit.equipment.getWeapon(0).getName() + "]");
                 System.out.println(highInit.getName() + " has " + highInit.getHitPoints() +
                         " HP remaining.\n");
 
@@ -172,10 +186,13 @@ public class Main {
         }
     }
 
+    public static void inventoryContent(){
+        System.out.println();
+    }
 }
 
 /*
-Generator losowych wydarzeń -> Spotkanie przeciwnika, spotkanie NPC, znalezienie przedmiotu.
+TODO: Generator losowych wydarzeń -> Spotkanie przeciwnika, spotkanie NPC, znalezienie przedmiotu.
  */
 
 /*
