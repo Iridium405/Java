@@ -1,26 +1,25 @@
 package iridiumdev;
 
-import java.util.ArrayList;
 
 public abstract class Character {
     private String name;
-    private int hitPoints;
-    private int energy;
-    private int stamina;
+    private double hitPoints;
+    private double energy;
+    private double stamina;
     private int money;
     private int skillPoint;
     private int expGivenWhenDead;
-    private int strength;
-    private int defence;
+    private double strength;
+    private double defence;
     private int quickness;
     private int power;
-    private int protection;
+    private double protection;
     private int focus;
     private boolean isAlive;
     private boolean isEnemy;
     // private double money/coins;
 
-    public Character(String name, int hitPoints, int energy, int stamina, int skillPoint,
+    public Character(String name, double hitPoints, double energy, double stamina, int skillPoint,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
@@ -36,7 +35,7 @@ public abstract class Character {
         this.isAlive = isAlive;
     }
 
-    public Character(boolean isEnemy, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
+    public Character(boolean isEnemy, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.isAlive = isAlive;
         this.name = name;
@@ -53,7 +52,7 @@ public abstract class Character {
         this.isEnemy = isEnemy;
     }
 
-    public Character(int money, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
+    public Character(int money, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive, boolean isEnemy) {
         this.name = name;
         this.hitPoints = hitPoints;
@@ -77,27 +76,27 @@ public abstract class Character {
         return name;
     }
 
-    public int getHitPoints() {
+    public double getHitPoints() {
         return hitPoints;
     }
 
-    public void setHitPoints(int hitPoints) {
+    public void setHitPoints(double hitPoints) {
         this.hitPoints = hitPoints;
     }
 
-    public int getEnergy() {
+    public double getEnergy() {
         return energy;
     }
 
-    public void setEnergy(int energy) {
+    public void setEnergy(double energy) {
         this.energy = energy;
     }
 
-    public int getStamina() {
+    public double getStamina() {
         return stamina;
     }
 
-    public void setStamina(int stamina) {
+    public void setStamina(double stamina) {
         this.stamina = stamina;
     }
 
@@ -113,11 +112,11 @@ public abstract class Character {
         return expGivenWhenDead;
     }
 
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public int getDefence() {
+    public double getDefence() {
         return defence;
     }
 
@@ -129,7 +128,7 @@ public abstract class Character {
         return power;
     }
 
-    public int getProtection() {
+    public double getProtection() {
         return protection;
     }
 
@@ -149,11 +148,19 @@ public abstract class Character {
         return isEnemy;
     }
 
-    public int higherStat(int characterStat_1, int characterStat_2){
-        if(characterStat_1 >= characterStat_2){
-            return characterStat_1;
+    public double physicalAttackRatio(Character defending){
+        double physicalDamage = getStrength() + equipment.getWeapon(0).makeDamage();
+        double physicalDefence = defending.getDefence() + defending.equipment.getArmour(0).getDefence();
+        double attackRatio = physicalDamage / physicalDefence;
+
+        if(attackRatio > 0) {
+            return attackRatio;
         } else {
-            return characterStat_2;
+            return 0.1;
         }
-    } // method tested.
+    }
+
+    public double energyAttackRatio(Character defending){
+        return 0;
+    }
 }

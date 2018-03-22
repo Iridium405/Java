@@ -16,13 +16,13 @@ public class Equipment {
                 return true;
             } else {
                 potion.setQuantity(potion.getQuantity()+ amount);
-                System.out.println(potion.getName() + " [" + amount + "] added to equipment.");
+                System.out.println("\n" + potion.getName() + " [" + amount + "] added to equipment.");
                 return true;
             }
         } else {
             potionEquipment.add(potion);
             potion.setQuantity(+ amount);
-            System.out.println(potion.getName() + " [" + amount + "] added to equipment.");
+            System.out.println("\n" + potion.getName() + " [" + amount + "] added to equipment.");
             return true;
         }
     }
@@ -58,7 +58,7 @@ public class Equipment {
             return false;
         } else {
             weaponEquipment.add(weapon);
-            System.out.println(weapon.getName() + " added to equipment.");
+            System.out.println("\n" + weapon.getName() + " added to equipment.");
             return true;
         }
     }
@@ -67,8 +67,8 @@ public class Equipment {
             System.out.println("\nWeapons:");
             for (Weapon weapon : this.weaponEquipment) {
                 System.out.println(weaponEquipment.indexOf(weapon)+". " + weapon.getName() +
-                        " [" + Integer.toString(weapon.getMinDamage()) +
-                        "-" + Integer.toString(weapon.getMaxDamage()) + "]");
+                        " [" + Double.toString(weapon.getMinDamage()) +
+                        "-" + Double.toString(weapon.getMaxDamage()) + "]");
             }
             return null;
         }
@@ -89,7 +89,7 @@ public class Equipment {
                 return false;
             } else {
                 armourEquipment.add(armour);
-                System.out.println(armour.getName() + " added to equipment.");
+                System.out.println("\n" + armour.getName() + " added to equipment.");
                 return true;
             }
         }
@@ -98,11 +98,15 @@ public class Equipment {
             System.out.println("\nArmour:");
             for (Armour armour : this.armourEquipment) {
                 System.out.println(armourEquipment.indexOf(armour)+". " + armour.getName() +
-                        " [d:" + Integer.toString(armour.getDefence()) +
-                        "/ p:" + Integer.toString(armour.getProtection()) + "]");
+                        " [d:" + Double.toString(armour.getDefence()) +
+                        "/ p:" + Double.toString(armour.getProtection()) + "]");
             }
             return null;
         }
+
+    public Armour getArmour(int index){
+        return this.armourEquipment.get(index);
+    }
 
 
     public void inventoryContent(){
