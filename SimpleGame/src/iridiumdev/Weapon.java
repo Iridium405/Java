@@ -6,8 +6,8 @@ public class Weapon {
     private String name;
     private String type;
     private int quantity;
-    private double minDamage;
-    private double maxDamage;
+    private int minDamage;
+    private int maxDamage;
     //TODO: private double value;
 
     public Weapon(String name, int minDamage, int maxDamage) {
@@ -30,15 +30,15 @@ public class Weapon {
         return quantity;
     }
 
-    public double getMinDamage() {
+    public int getMinDamage() {
         return minDamage;
     }
 
-    public double getMaxDamage() {
+    public int getMaxDamage() {
         return maxDamage;
     }
 
-    public double makeDamage(){ //makeDamage - atak fizyczny VS. conjureDamage - atak energetyczny
-        return ThreadLocalRandom.current().nextDouble(this.minDamage,this.maxDamage +1);
+    public int makeDamage(){ //makeDamage - atak fizyczny VS. conjureDamage - atak energetyczny
+        return ThreadLocalRandom.current().nextInt(this.minDamage,this.maxDamage +1);
     }
 }

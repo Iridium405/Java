@@ -27,7 +27,6 @@ public class Equipment {
         }
     }
 
-
         public int sizeOfPotionEquipment(){
             return this.potionEquipment.size();
         }
@@ -48,6 +47,7 @@ public class Equipment {
         public Potion removePotion(int index){
         return this.potionEquipment.remove(index);
     }
+
 
 
     private ArrayList<Weapon> weaponEquipment = new ArrayList<>();
@@ -81,6 +81,8 @@ public class Equipment {
         return this.weaponEquipment.remove(index);
     }
 
+
+
     private ArrayList<Armour> armourEquipment = new ArrayList<Armour>();
 
         public boolean addArmour(Armour armour) {
@@ -104,8 +106,12 @@ public class Equipment {
             return null;
         }
 
-    public Armour getArmour(int index){
+        public Armour getArmour(int index){
         return this.armourEquipment.get(index);
+    }
+
+        public Armour removeArmour(int index){
+        return this.armourEquipment.remove(index);
     }
 
 

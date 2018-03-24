@@ -4,10 +4,11 @@ public class Player extends Character {
     private int level;
     private int experience;
 
-    public Player(String name, int hitPoints, int energy, int stamina, int level, int experience, int strength, int defence, int quickness, int power, int protection, int focus) {
+    public Player(String name, int hitPoints, int energy, int stamina,
+                  int strength, int defence, int quickness, int power, int protection, int focus) {
         super(name, hitPoints, energy, stamina, 2, strength, defence, quickness, power, protection, focus, true);
-        this.level = level;
-        this.experience = experience;
+        this.level = 1;
+        this.experience = 0;
     }
 
     public int getLevel() {
@@ -40,6 +41,10 @@ public class Player extends Character {
         }
     } //USE after every combat(). / method tested.
 
-
-
 }
+
+/*
+    TODO: wprowadzić pole int tempLevel.
+          (zapisywany będzie obecny poziom, przed przyznaniem doświadczenia po walce, następnie będzie porównywany
+          z poziomem po przyznaniu doświadczenia po walce -> "Congratulations! Level up!")
+ */

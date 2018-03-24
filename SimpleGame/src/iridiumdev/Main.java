@@ -8,7 +8,7 @@ public class Main {
 
         Mechanics m = new Mechanics();
 
-        Player player = new Player("Dust",100,100,100,1,0,
+        Player player = new Player("Dust",100,100,100,
                 5,5,5,5,5,5);
 
         Weapon shortSword = new Weapon("Short Sword",2,4);
@@ -23,11 +23,9 @@ public class Main {
         Weapon woodenClaws = new Weapon("Wooden Claws",1,4);
         Armour leatherArmour = new Armour("Leather Armour", 2,1);
 
-
         player.equipment.inventoryContent();
 
         ArrayList<Character> actionQueue = new ArrayList<>();
-
 
         while(player.getLevel() <= 3 && player.isAlive()){
             player.levelChecking();
@@ -35,10 +33,6 @@ public class Main {
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), m.dice(3));
             enemy.equipment.addWeapon(woodenClaws);
             enemy.equipment.addArmour(leatherArmour);
-
-            /*
-            TODO: enemy.equipment.addArmour(randomArmour); -> randomowe uzbrojenie dla przeciwnika - modyfikator obrony
-            */
 
             System.out.println("\n                         Enemy: " + enemy.getName() + "\n");
             System.out.println("   Initiative:");
@@ -59,11 +53,10 @@ public class Main {
         }
 
     }
-
-
-
 }
 
 /*
 TODO: Generator losowych wydarzeń -> Spotkanie przeciwnika, spotkanie NPC, znalezienie przedmiotu.
+TODO: Licznik tur.
+TODO: Action Points -> gracz może wykonać określoną ilość czynności w trakcie tury.
  */

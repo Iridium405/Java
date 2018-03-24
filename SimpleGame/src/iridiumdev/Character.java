@@ -9,11 +9,11 @@ public abstract class Character {
     private int money;
     private int skillPoint;
     private int expGivenWhenDead;
-    private double strength;
-    private double defence;
+    private int strength;
+    private int defence;
     private int quickness;
     private int power;
-    private double protection;
+    private int protection;
     private int focus;
     private boolean isAlive;
     private boolean isEnemy;
@@ -112,11 +112,11 @@ public abstract class Character {
         return expGivenWhenDead;
     }
 
-    public double getStrength() {
+    public int getStrength() {
         return strength;
     }
 
-    public double getDefence() {
+    public int getDefence() {
         return defence;
     }
 
@@ -128,7 +128,7 @@ public abstract class Character {
         return power;
     }
 
-    public double getProtection() {
+    public int getProtection() {
         return protection;
     }
 
@@ -148,19 +148,4 @@ public abstract class Character {
         return isEnemy;
     }
 
-    public double physicalAttackRatio(Character defending){
-        double physicalDamage = getStrength() + equipment.getWeapon(0).makeDamage();
-        double physicalDefence = defending.getDefence() + defending.equipment.getArmour(0).getDefence();
-        double attackRatio = physicalDamage / physicalDefence;
-
-        if(attackRatio > 0) {
-            return attackRatio;
-        } else {
-            return 0.1;
-        }
-    }
-
-    public double energyAttackRatio(Character defending){
-        return 0;
-    }
 }
