@@ -8,27 +8,25 @@ public class Mechanics {
     ArrayList<Integer> diceRolls = new ArrayList<>();
 
     public void combat(Character highInit, Character lowInit) {
-
+        int turnCount = 1;
 
         while (highInit.isAlive() || lowInit.isAlive()) {
+
+            System.out.println("   Turn " + turnCount);
 
             int weaponDamage = highInit.equipment.getWeapon(0).makeDamage();
             int physicalDamage = highInit.getStrength() + weaponDamage;
             int physicalDefence = lowInit.getDefence() + lowInit.equipment.getArmour(0).getDefence();
             double damageModificator;
 
-            if(isStatHigher(physicalDamage,physicalDefence)){
-                if(isStatDoubled(diceRolls.get(0),diceRolls.get(1))){
+            if(isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(diceRolls.get(0),diceRolls.get(1))){
                     damageModificator = 1.5;
-                } else {
+                } else if(isStatHigher(physicalDamage,physicalDefence)) {
                     damageModificator = 1;
-                }
-            } else {
-                if(isStatDoubled(diceRolls.get(0), diceRolls.get(1))){
+                } else if(!isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(diceRolls.get(0),diceRolls.get(1))) {
                     damageModificator = 1;
                 } else {
                     damageModificator = 0.5;
-                }
             }
 
             double highInitDamage = physicalDamage * damageModificator;
@@ -80,6 +78,8 @@ public class Mechanics {
                 usePotion(highInit, "HitPoints", highInit.equipment.getPotion(0));
                 checkingPotionEquipment(highInit, highInit.equipment.getPotion(0));
             }
+
+            turnCount++;
 
             if (!highInit.isAlive()) {
                 System.out.println(lowInit.getName() + " won with " + lowInit.getHitPoints() +
@@ -175,6 +175,9 @@ public class Mechanics {
         }
     }
 
+    public void Strike(){
+
+    }
 
 }
   /*

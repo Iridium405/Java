@@ -9,7 +9,7 @@ public class Main {
         Mechanics m = new Mechanics();
 
         Player player = new Player("Dust",100,100,100,
-                5,5,5,5,5,5);
+                5,5,1,5,5,1);
 
         Weapon shortSword = new Weapon("Short Sword",2,4);
         player.equipment.addWeapon(shortSword);
@@ -57,6 +57,5 @@ public class Main {
 
 /*
 TODO: Generator losowych wydarzeń -> Spotkanie przeciwnika, spotkanie NPC, znalezienie przedmiotu.
-TODO: Licznik tur.
 TODO: Action Points -> gracz może wykonać określoną ilość czynności w trakcie tury.
  */
