@@ -175,7 +175,7 @@ public class Mechanics {
         }
     }
 
-    public void Strike(){
+    public void strike(){
 
     }
 
