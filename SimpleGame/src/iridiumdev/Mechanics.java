@@ -5,25 +5,25 @@ import java.util.Random;
 
 public class Mechanics {
 
-    ArrayList<Integer> diceRolls = new ArrayList<>();
+    ArrayList<Integer> initRolls = new ArrayList<>();
 
-    public void combat(Character highInit, Character lowInit) {
+    public void combat(Character highInit, Character lowInit) {         // highInit - player with higher initiative; lowInit - the opposite;
         int turnCount = 1;
 
-        while (highInit.isAlive() || lowInit.isAlive()) {
+        while (highInit.isAlive() || lowInit.isAlive()) {               // checking if both sides (player and enemy) are still alive
 
             System.out.println("   Turn " + turnCount);
 
             int weaponDamage = highInit.equipment.getWeapon(0).makeDamage();
-            int physicalDamage = highInit.getStrength() + weaponDamage;
-            int physicalDefence = lowInit.getDefence() + lowInit.equipment.getArmour(0).getDefence();
+            int physicalDamage = highInit.getStrength() + weaponDamage;                                            // Physical Damage = natural "Strength" + random damage made by weapon
+            int physicalDefence = lowInit.getDefence() + lowInit.equipment.getArmour(0).getDefence();        // Defence from physical damage = natural "Defence" + cumulative Armour from equipment
             double damageModificator;
 
-            if(isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(diceRolls.get(0),diceRolls.get(1))){
+            if(isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(initRolls.get(0), initRolls.get(1))){
                     damageModificator = 1.5;
                 } else if(isStatHigher(physicalDamage,physicalDefence)) {
                     damageModificator = 1;
-                } else if(!isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(diceRolls.get(0),diceRolls.get(1))) {
+                } else if(!isStatHigher(physicalDamage,physicalDefence) && isStatDoubled(initRolls.get(0), initRolls.get(1))) {
                     damageModificator = 1;
                 } else {
                     damageModificator = 0.5;
@@ -99,16 +99,16 @@ public class Mechanics {
         if(char_1_Initiative >= char_2_Initiative){
             arrayList.add(0,char_1);
             arrayList.add(1,char_2);
-            diceRolls.add(char_1_Initiative);
-            diceRolls.add(char_2_Initiative);
+            initRolls.add(char_1_Initiative);
+            initRolls.add(char_2_Initiative);
 
             System.out.println(char_1.getName() + " rolls " + char_1_Initiative + " [" + char_1_BaseStat + " base]");
             System.out.println(char_2.getName() + " rolls " + char_2_Initiative + " [" + char_2_BaseStat + " base]");
         } else if(char_1_Initiative < char_2_Initiative){
             arrayList.add(0, char_2);
             arrayList.add(1, char_1);
-            diceRolls.add(char_2_Initiative);
-            diceRolls.add(char_1_Initiative);
+            initRolls.add(char_2_Initiative);
+            initRolls.add(char_1_Initiative);
 
             System.out.println(char_2.getName() + " rolls " + char_2_Initiative + " [" + char_2_BaseStat + " base]");
             System.out.println(char_1.getName() + " rolls " + char_1_Initiative + " [" + char_1_BaseStat + " base]");

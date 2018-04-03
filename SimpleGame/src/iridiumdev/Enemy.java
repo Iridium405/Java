@@ -23,6 +23,7 @@ public class Enemy extends Character {
                                                         5, 2, 5, 5, 2, 5);
                         return enemyLv_01_3;
                     default:
+                        System.out.println("Null");
                         return null;
                 }
             case 2:
@@ -36,10 +37,11 @@ public class Enemy extends Character {
                                                         4, 4, 2, 6, 4, 5);
                         return enemyLv_02_2;
                     case 3:
-                        Enemy enemyLv_03_3 = new Enemy("Orc Berserker", 120, 100, 150, 200,
+                        Enemy enemyLv_02_3 = new Enemy("Orc Berserker", 120, 100, 150, 200,
                                                         7, 1, 4, 3, 1, 1);
-                        return enemyLv_03_3;
+                        return enemyLv_02_3;
                     default:
+                        System.out.println("Null");
                         return null;
                 }
             case 3:

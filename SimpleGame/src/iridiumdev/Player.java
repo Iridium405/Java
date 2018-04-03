@@ -38,6 +38,10 @@ public class Player extends Character {
             this.level = 4;
         } else if(this.experience >= 2000 && this.experience < 3000) {
             this.level = 5;
+        } else if(this.experience >= 3000 && this.experience < 4500) {
+            this.level = 6;
+        } else if(this.experience >= 4500 && this.experience < 7500) {
+            this.level = 7;
         }
     } //USE after every combat(). / method tested.
 
@@ -45,6 +49,6 @@ public class Player extends Character {
 
 /*
     TODO: wprowadzić pole int tempLevel.
-          (zapisywany będzie obecny poziom, przed przyznaniem doświadczenia po walce, następnie będzie porównywany
-          z poziomem po przyznaniu doświadczenia po walce -> "Congratulations! Level up!")
+          (zapisywany będzie obecny poziom (przed przyznaniem doświadczenia), następnie będzie porównywany
+          z poziomem po przyznaniu doświadczenia -> jeśli będzie różnica - "Congratulations! Level up!", oraz nowe punkty umiejętności)
  */
