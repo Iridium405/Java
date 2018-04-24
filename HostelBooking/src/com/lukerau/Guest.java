@@ -1,5 +1,6 @@
 package com.lukerau;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,8 +10,9 @@ public class Guest {
     private String address;
     private String phoneNumber;
     private String idSerialNumber;
-    private double totalCost = 0;
-    private double totalServiceCost = 0;
+    private double totalCost;
+    private double totalServiceCost;
+    private Room theRoom;
 
     public Guest(String name, String surname, String address, String phoneNumber, String idSerialNumber) {
         this.name = name;
@@ -18,7 +20,8 @@ public class Guest {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.idSerialNumber = idSerialNumber;
-
+        this.totalServiceCost = 0;
+        this.totalCost = 0;
     }
 
     public String getName() {
@@ -82,10 +85,33 @@ public class Guest {
         for(Service s : serviceList){
             System.out.println("Name: " + s.getServiceName() + "; Cost: $" + s.getServiceCost());
         }
-        System.out.println("Total: " + totalServiceCost);
+        System.out.println("Service total: " + totalServiceCost);
+    }
+
+    public void accommodateToRoom (Room room) {
+        if (!room.isOccupied()){
+            this.theRoom = room;
+            int days = daysToStay();
+            theRoom.setFullPrice(theRoom.getPriceDaily() * days);
+            System.out.println("Price daily: " + theRoom.getPriceDaily() + " Days to stay: " + days);
+            fullCosts.add(theRoom.getFullPrice());
+            room.isOccupied();
+        } else {
+            System.out.println("Room " + room.getRoomNumber() + " is occupied.");
+        }
+    }
+
+    public int daysToStay(){
+        long start = theRoom.getBookingStart().toEpochDay();
+        long end = theRoom.getBookingEnd().toEpochDay();
+        int diff =  (int) end - (int) start;
+        return diff;
     }
 
     public void printTotalCost(){
+        System.out.println("Name: Room no." + theRoom.getRoomNumber() + ". Cost: " + theRoom.getFullPrice());
+        printServiceList();
+        System.out.print("\tTotal: " + (totalServiceCost+theRoom.getFullPrice()));
 
     }
 }
