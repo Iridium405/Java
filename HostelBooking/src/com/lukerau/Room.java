@@ -27,12 +27,17 @@ public class Room {
     }
 
 
+
+
     public int getRoomNumber() {
         return roomNumber;
     }
 
     public boolean isOccupied() {
-        return occupied;
+        if(occupationCheck) {
+            return occupied;
+        }
+        return !occupied;
     }
 
     public LocalDate getBookingStart() {
@@ -62,4 +67,19 @@ public class Room {
     public void setFullPrice(double fullPrice) {
         this.fullPrice = fullPrice;
     }
+
+    public boolean occupationCheck(){
+        // każdy pokój ma mieć hashSet z klasą Terminarz, gdzie zapisywane będą początki i końce rezerwacji
+        // a także blokowane wszystkie dni pomiędzy tymi datami
+        // occupationCheck będzie sprawdzał dostępność pokoju w danym terminie.
+    }
+
+    /*
+    * Napisać metodę wyszukującą wszystkie wolne pokoje w podanym przedziale czasowym.
+        [wpisuję: 5.07.18 - 8.07.18 -> pokazuje mi, które pokoje będą wolne).
+    * Napisać metodę wyszukującą najbliższy wolny termin dla konkretnego pokoju z ilością dni, kiedy jest dostępny.
+      Dodać opcję szukania kolejnych wolnych terminów.
+        [wpisuję: pokój nr 5 -> pokazuje mi np. 5.07.18 (5 dni)]
+        [wpisuję: pokój nr 5, szukaj dalej -> pokazuje mi następny termin z ilością dostępnych dni.
+     */
 }

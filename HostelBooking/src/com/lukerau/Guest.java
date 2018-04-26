@@ -1,7 +1,9 @@
 package com.lukerau;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Guest {
@@ -23,6 +25,8 @@ public class Guest {
         this.totalServiceCost = 0;
         this.totalCost = 0;
     }
+
+
 
     public String getName() {
         return name;
@@ -72,7 +76,7 @@ public class Guest {
         this.totalCost = totalCost;
     }
 
-    Service roomcleaning = new Service("Room cleaning",12.00);
+    Service roomCleaning = new Service("Room cleaning",12.00);
     private Set<Service> serviceList = new HashSet<>();
     private Set<Double> fullCosts = new HashSet<>();
 
@@ -111,7 +115,16 @@ public class Guest {
     public void printTotalCost(){
         System.out.println("Name: Room no." + theRoom.getRoomNumber() + ". Cost: " + theRoom.getFullPrice());
         printServiceList();
-        System.out.print("\tTotal: " + (totalServiceCost+theRoom.getFullPrice()));
+        setTotalCost(totalServiceCost + theRoom.getFullPrice());
+        System.out.print("\tTotal: " + getTotalCost());
 
+    }
+
+    public String completeIntel(){
+        System.out.println("Name: " + getName());
+        System.out.println("Surname: " + getSurname());
+        System.out.println("Address: " + getAddress());
+        System.out.println("Total: " + getTotalCost());
+        return "1";
     }
 }
