@@ -23,20 +23,23 @@ public class Main {
         Service breakfast = new Service("Breakfast", 8.50);
         Service dogAccommodation = new Service("Dog Accommodation", 15.00);
 
-        System.out.println("Today: " + TODAY);
-        visitors.put(123465798, guest001.completeIntel());
+        System.out.println("[Today: " + TODAY + "]");
 
-        room001.setBookingStart(5,5,2018);
-        room001.setBookingEnd(12,5,2018);
-        guest001.accommodateToRoom(room001);
-        guest001.addServiceToGuest(roomCleaning);
-        guest001.addServiceToGuest(breakfast);
-        guest001.printTotalCost();
+//        room001.dates();
+//        room001.setBookingStart(5,5,2018);
+//        room001.setBookingEnd(12,5,2018);
+//        room001.addToSchedule();
+//        guest001.accommodateToRoom(room001);
 
-        room001.setBookingStart(5,5,2018);
-        room001.setBookingEnd(12,5,2018);
-        guest002.accommodateToRoom(room001);                // bug
-        guest002.printTotalCost();
+//        guest001.addServiceToGuest(roomCleaning);
+//        guest001.addServiceToGuest(breakfast);
+//        guest001.printTotalCost();
+
+        room001.setBookingStart(2,5,2018);
+        room001.setBookingEnd(4,5,2018);
+        room001.addToSchedule();
+//        guest002.accommodateToRoom(room001);                // bug
+//        guest002.printTotalCost();
 
 
 

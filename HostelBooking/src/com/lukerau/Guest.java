@@ -95,9 +95,11 @@ public class Guest {
     public void accommodateToRoom (Room room) {
         if (!room.isOccupied()){
             this.theRoom = room;
-            int days = daysToStay();
-            theRoom.setFullPrice(theRoom.getPriceDaily() * days);
-            System.out.println("Price daily: " + theRoom.getPriceDaily() + " Days to stay: " + days);
+            int nights = nightsToStay();
+            System.out.println(getName() + " " + getSurname() + " accommodated to room no." + theRoom.getRoomNumber());
+            theRoom.setFullPrice(theRoom.getPriceDaily() * nights);
+            System.out.println("Price daily: $" + theRoom.getPriceDaily() + "." + "\nArrival: " + theRoom.getBookingStart()
+                    + "\nDeparture: " + theRoom.getBookingEnd() + "\nNights to stay: " + nights);
             fullCosts.add(theRoom.getFullPrice());
             room.isOccupied();
         } else {
@@ -105,7 +107,7 @@ public class Guest {
         }
     }
 
-    public int daysToStay(){
+    public int nightsToStay(){
         long start = theRoom.getBookingStart().toEpochDay();
         long end = theRoom.getBookingEnd().toEpochDay();
         int diff =  (int) end - (int) start;
