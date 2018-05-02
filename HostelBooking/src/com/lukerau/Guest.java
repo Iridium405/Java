@@ -93,7 +93,6 @@ public class Guest {
     }
 
     public void accommodateToRoom (Room room) {
-        if (!room.isOccupied()){
             this.theRoom = room;
             int nights = nightsToStay();
             System.out.println(getName() + " " + getSurname() + " accommodated to room no." + theRoom.getRoomNumber());
@@ -101,10 +100,6 @@ public class Guest {
             System.out.println("Price daily: $" + theRoom.getPriceDaily() + "." + "\nArrival: " + theRoom.getBookingStart()
                     + "\nDeparture: " + theRoom.getBookingEnd() + "\nNights to stay: " + nights);
             fullCosts.add(theRoom.getFullPrice());
-            room.isOccupied();
-        } else {
-            System.out.println("Room " + room.getRoomNumber() + " is occupied.");
-        }
     }
 
     public int nightsToStay(){
