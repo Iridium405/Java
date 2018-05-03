@@ -1,22 +1,16 @@
 package com.lukerau;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Room {
     private int roomNumber;
     private int maxAccommodated;
-    private boolean occupied;
-    private boolean booked;
     public static final LocalDate TODAY = LocalDate.now();
     private LocalDate bookingStart;
-    private LocalDate midDate_A;
-    private LocalDate midDate_B;
     private LocalDate bookingEnd;
     private double priceDaily;
     private double fullPrice;
@@ -36,22 +30,18 @@ public class Room {
 
     }
 
-    List<LocalDate> listOfBookings = Stream.iterate(TODAY, date -> date.plusDays(1))
+    private List<LocalDate> datesAvailable = Stream.iterate(TODAY, date -> date.plusDays(1))
             .limit(365)
             .collect(Collectors.toList());
-    OccupationSchedule occupSchedule = new OccupationSchedule(getBookingStart(),getBookingEnd());
-    Set<LocalDate> schedule = new HashSet<>();
+
+    private List<LocalDate> bookingList = new ArrayList<>();
 
     public int getRoomNumber() {
         return roomNumber;
     }
 
-    public boolean isOccupied() {
-        return occupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.occupied = occupied;
+    public int getMaxAccommodated() {
+        return maxAccommodated;
     }
 
     public LocalDate getBookingStart() {
@@ -59,27 +49,26 @@ public class Room {
     }
 
     public void setBookingStart(int day, int month, int year) {
-        if (!listOfBookings.contains(LocalDate.of(year, month, day))){
+        if (!datesAvailable.contains(LocalDate.of(year, month, day))){
             System.out.println("The room is already taken on that day.");
         } else {
             bookingStart = LocalDate.of(year, month, day);
         }
     }
 
-
     public LocalDate getBookingEnd() {
         return bookingEnd;
     }
 
     public void setBookingEnd(int day, int month, int year) {
-        if (!listOfBookings.contains(LocalDate.of(year, month, day))) {
+        if (!datesAvailable.contains(LocalDate.of(year, month, day))) {
             System.out.println("The room is already booked on that day.");
         } else {
             bookingEnd = LocalDate.of(year, month, day);
-            midDate_A = bookingStart;
+            LocalDate midDate_A = bookingStart;
             while(!midDate_A.isAfter(LocalDate.of(year, month, day))){
-                midDate_B = midDate_A.plusDays(1);
-                if (isBooked(listOfBookings,midDate_A)) {
+                LocalDate midDate_B = midDate_A.plusDays(1);
+                if (isBooked(datesAvailable, bookingList, midDate_A)) {
                     System.out.println(midDate_A);
                     midDate_A = midDate_B;
                 }
@@ -87,10 +76,11 @@ public class Room {
         }
     }
 
-    public boolean isBooked(List<LocalDate> list, LocalDate date) {
-        if (date.isAfter(TODAY) && list.contains(date)){
+    public boolean isBooked(List<LocalDate> available, List<LocalDate> booked, LocalDate date) {
+        if (date.isAfter(TODAY) && available.contains(date)){
             System.out.println("Booking completed: " + date);
-            list.remove(date);
+            booked.add(date);
+            available.remove(date);
             return true;
         } else {
             System.out.println("One of the dates is invalid: " + date);
@@ -98,10 +88,11 @@ public class Room {
         }
     }
 
-
     public void printDates(){
-        System.out.println(listOfBookings.size());
-        System.out.println(listOfBookings);
+        System.out.println("Dates available size: " + datesAvailable.size());
+        System.out.println("Dates booked size: " + bookingList.size());
+        System.out.println("Dates available: " + datesAvailable);
+        System.out.println("Dates booked:: " + bookingList);
     }
 
     public double getPriceDaily() {
@@ -116,12 +107,6 @@ public class Room {
         this.fullPrice = fullPrice;
     }
 
-
-//    public boolean occupationCheck(){
-//        // każdy pokój ma mieć hashSet z klasą Terminarz, gdzie zapisywane będą początki i końce rezerwacji
-//        // a także blokowane wszystkie dni pomiędzy tymi datami
-//        // occupationCheck będzie sprawdzał dostępność pokoju w danym terminie.
-//    }
 
     /*
     * Napisać metodę wyszukującą wszystkie wolne pokoje w podanym przedziale czasowym.

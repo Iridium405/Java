@@ -1,9 +1,6 @@
 package com.lukerau;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class Guest {
@@ -26,102 +23,79 @@ public class Guest {
         this.totalCost = 0;
     }
 
+    private Set<Service> serviceList = new HashSet<>();
+    private Set<Double> fullCosts = new HashSet<>();
 
-
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
+    private String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getAddress() {
+    private String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
+    private String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getIdSerialNumber() {
+    private String getIdSerialNumber() {
         return idSerialNumber;
     }
 
-    public void setIdSerialNumber(String idSerialNumber) {
-        this.idSerialNumber = idSerialNumber;
-    }
-
-    public double getTotalCost() {
+    private double getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(double totalCost) {
+    private void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
 
-    Service roomCleaning = new Service("Room cleaning",12.00);
-    private Set<Service> serviceList = new HashSet<>();
-    private Set<Double> fullCosts = new HashSet<>();
+    private int nightsToStay(){
+        long start = theRoom.getBookingStart().toEpochDay();
+        long end = theRoom.getBookingEnd().toEpochDay();
+        return (int) end - (int) start;
+    }
+
+    public void accommodateToRoom (Room room) {
+        this.theRoom = room;
+        int nights = nightsToStay();
+        System.out.println(getName() + " " + getSurname() + " accommodated to room no." + theRoom.getRoomNumber());
+        theRoom.setFullPrice(theRoom.getPriceDaily() * nights);
+        System.out.println("Price daily: $" + theRoom.getPriceDaily() + "." + "\nArrival: " + theRoom.getBookingStart()
+                + "\nDeparture: " + theRoom.getBookingEnd() + "\nNights to stay: " + nights);
+        fullCosts.add(theRoom.getFullPrice());
+    }
 
     public void addServiceToGuest(Service service) {
         serviceList.add(service);
         this.totalServiceCost += service.getServiceCost();
     }
 
-    public void printServiceList(){
+    private void printServiceList(){
         for(Service s : serviceList){
-            System.out.println("Name: " + s.getServiceName() + "; Cost: $" + s.getServiceCost());
+            System.out.println("\tService: " + s.getServiceName() + "; Cost: $" + s.getServiceCost());
         }
-        System.out.println("Service total: " + totalServiceCost);
+        System.out.println("\tService summary: " + totalServiceCost);
     }
 
-    public void accommodateToRoom (Room room) {
-            this.theRoom = room;
-            int nights = nightsToStay();
-            System.out.println(getName() + " " + getSurname() + " accommodated to room no." + theRoom.getRoomNumber());
-            theRoom.setFullPrice(theRoom.getPriceDaily() * nights);
-            System.out.println("Price daily: $" + theRoom.getPriceDaily() + "." + "\nArrival: " + theRoom.getBookingStart()
-                    + "\nDeparture: " + theRoom.getBookingEnd() + "\nNights to stay: " + nights);
-            fullCosts.add(theRoom.getFullPrice());
-    }
-
-    public int nightsToStay(){
-        long start = theRoom.getBookingStart().toEpochDay();
-        long end = theRoom.getBookingEnd().toEpochDay();
-        int diff =  (int) end - (int) start;
-        return diff;
-    }
-
-    public void printTotalCost(){
-        System.out.println("Name: Room no." + theRoom.getRoomNumber() + ". Cost: " + theRoom.getFullPrice());
+    private void printTotalCost(){
+        System.out.println("Reservation: Room no. " + theRoom.getRoomNumber() + " - Cost: " + theRoom.getFullPrice());
         printServiceList();
         setTotalCost(totalServiceCost + theRoom.getFullPrice());
-        System.out.print("\tTotal: " + getTotalCost());
-
+        System.out.print("\nTotal: " + getTotalCost());
     }
 
-    public String completeIntel(){
+    public void completeIntel(){
         System.out.println("Name: " + getName());
         System.out.println("Surname: " + getSurname());
+        System.out.println("ID: " + getIdSerialNumber());
         System.out.println("Address: " + getAddress());
-        System.out.println("Total: " + getTotalCost());
-        return "1";
+        System.out.println("Phone: " + getPhoneNumber());
+        System.out.println();
+        printTotalCost();
     }
 }
