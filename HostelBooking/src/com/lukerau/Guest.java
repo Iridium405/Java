@@ -55,9 +55,14 @@ public class Guest {
     }
 
     private int nightsToStay(){
-        long start = theRoom.getBookingStart().toEpochDay();
-        long end = theRoom.getBookingEnd().toEpochDay();
-        return (int) end - (int) start;
+        if (theRoom.getBookingStart() == null){
+            System.out.println("No booking start found.");
+            return 0;
+        } else {
+            long start = theRoom.getBookingStart().toEpochDay();
+            long end = theRoom.getBookingEnd().toEpochDay();
+            return (int) end - (int) start;
+        }
     }
 
     public void accommodateToRoom (Room room) {

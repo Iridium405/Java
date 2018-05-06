@@ -26,7 +26,7 @@ public class Main {
         System.out.println("[Today: " + TODAY + "]");
 
         room001.printDates();
-        room001.setBookingStart(5,5,2018);
+        room001.setBookingStart(7,5,2018);
         room001.setBookingEnd(12,5,2018);
         room001.printDates();
         guest001.accommodateToRoom(room001);
