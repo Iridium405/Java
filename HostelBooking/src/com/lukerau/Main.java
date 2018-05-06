@@ -36,17 +36,17 @@ public class Main {
         System.out.println("\n");
         guest001.completeIntel();
 
-//        System.out.println("\n");
-//        room001.setBookingStart(15,5,2018);
-//        room001.setBookingEnd(17,5,2018);
-//        room001.printDates();
-//        guest002.accommodateToRoom(room001);
-//        guest002.printTotalCost();
-//
-//        System.out.println("\n");
+        System.out.println("\n");
+        room001.setBookingStart(15,5,2018);
+        room001.setBookingEnd(17,5,2018);
+        room001.printDates();
+        guest002.accommodateToRoom(room001);
+        guest002.completeIntel();
 
-//        room001.setBookingStart(10,5,2018);
-//        room001.setBookingEnd(15,5,2018);
+        System.out.println("\n");
+
+        room001.setBookingStart(10,5,2018);
+        room001.setBookingEnd(14,5,2018);
 //        room001.printDates();
 
 
