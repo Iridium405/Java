@@ -6,7 +6,6 @@ public abstract class Character {
     private double hitPoints;
     private double energy;
     private double stamina;
-    private int initiative; //TODO
     private int money;
     private int skillPoint;
     private int expGivenWhenDead;
@@ -145,8 +144,43 @@ public abstract class Character {
         }
     }
 
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
     public boolean isEnemy() {
         return isEnemy;
+    }
+
+    public int statChecker(){
+        if (this.quickness > this.focus){
+            return this.quickness;
+        } else if (this.focus > this.quickness){
+            return this.focus;
+        } else {
+            if (this.strength > this.power){
+                return this.quickness;
+            } else if (this.power > this.strength) {
+                return this.focus;
+            } else {
+                if (this.stamina > this.energy) {
+                    return this.quickness;
+                } else if (this.energy > this.stamina) {
+                    return this.focus;
+                } else {
+                    return quickness;
+                }
+            }
+        }
+    }
+
+    public boolean lifeCheckValidation(){
+        if (this.hitPoints <= 0) {
+            setAlive(false);
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

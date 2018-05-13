@@ -3,6 +3,11 @@ package iridiumdev;
 public class Player extends Character {
     private int level;
     private int experience;
+    private int initiative;
+    private Weapon weapon;
+    private Armour torso;
+    private Armour head;
+    private Armour other;
     private int phisicalAttackRating; // = weapon quality + strength + skills;
     private int magicalAttackRating; // = magical weapon bonus + power + skills;
 

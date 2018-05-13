@@ -1,24 +1,39 @@
 package iridiumdev;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    static Dice mainDice = new Dice();
+    private static Dice mainDice = new Dice();
+    private static Player player = new Player("Dust", 100, 100, 100,
+            5, 5, 1, 5, 5, 1);
+
+
+    public static void menu(){
+        System.out.println("\n1. Continue your journey." +
+                "\n2. Check your inventory." +
+                "\n3. Quit.");
+        int x = scanner.nextInt();
+
+        if (x == 1) {
+            randomEvent(player, mainDice.throwDice(8));
+        } else if (x == 2) {
+            player.equipment.inventoryContent();
+        } else if (x == 3) {
+            System.exit(0);
+        }
+
+    }
 
     public static void main(String[] args) {
 
+        while (true) {
+            menu();
+        }
 
 
 
-
-        Mechanics m = new Mechanics();
-
-
-        Player player = new Player("Dust", 100, 100, 100,
-                5, 5, 1, 5, 5, 1);
-
+        /*Mechanics m = new Mechanics();
 
         player.equipment.inventoryContent();
 
@@ -46,7 +61,8 @@ public class Main {
             System.out.println(player.getName() + " has " + player.getExperience() + " exp and level "
                     + player.getLevel() + ".\n--------------------------------------------------------------------------\n"+
                                           "--------------------------------------------------------------------------\n");
-        }
+        }*/
+
 
 
 /*      while (player.isAlive()) {                      // [game body]
@@ -83,12 +99,33 @@ public class Main {
 
     }
 
-    public static void menu(){
-        System.out.println("\n1. Continue your journey." +
-                           "\n2. Check your inventory." +
-                           "\n3. Quit.");
-        int x = scanner.nextInt();
-
+    public static void randomEvent(Player player, int random) {
+        switch(random){
+            case 1:
+                Fight fight = new Fight(player, mainDice.throwDice(3));
+                while(fight.isActive() || player.isAlive()){
+                    fight.menu();
+                }
+                break;
+            case 2:
+                System.out.println("You see a caravan of carts heading to you.");
+                new NpcMeeting();
+                break;
+            case 3:
+                System.out.println("You found something!");
+                Findings findings = new Findings();
+                findings.randomWeapon();
+                System.out.println("It's " + findings.getWeaponFound().getName() + ", and you keep it.");
+                player.equipment.addWeapon(findings.getWeaponFound());
+                break;
+            case 4:
+                System.out.println("Dangerous situation occurred.");
+                new Situation();
+                break;
+            default:
+                System.out.println("This time nothing happened.");
+                break;
+        }
     }
 
 }

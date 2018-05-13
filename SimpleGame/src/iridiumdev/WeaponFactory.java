@@ -1,6 +1,6 @@
 package iridiumdev;
 
-public class BasicWeaponsList {
+public class WeaponFactory {
 
     Weapon sword_001 = new Sword("Stary Zardzewiały Miecz",1,0,1,2);
     Weapon sword_002 = new Sword("Stary Zwykły Miecz", 2,0,2,3);
@@ -19,5 +19,6 @@ public class BasicWeaponsList {
     Weapon spear_003 = new Spear("Dobrej Jakości Włócznia", 4, 0, 3,7);
     Weapon spear_004 = new Spear("Mistrzowska Włócznia", 11,4,15,30);
     Weapon spear_005 = new Spear("Shadow Piercer", 25, 20,40,90);
+
 
 }

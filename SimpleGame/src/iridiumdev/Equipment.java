@@ -67,8 +67,8 @@ public class Equipment {
             System.out.println("\nWeapons:");
             for (Weapon weapon : this.weaponEquipment) {
                 System.out.println(weaponEquipment.indexOf(weapon)+". " + weapon.getName() +
-                        " [" + Double.toString(weapon.getMinDamage()) +
-                        "-" + Double.toString(weapon.getMaxDamage()) + "]");
+                        " [" + weapon.getMinDamage() +
+                        "-" + weapon.getMaxDamage() + " dmg]");
             }
             return null;
         }
