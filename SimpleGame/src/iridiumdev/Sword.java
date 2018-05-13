@@ -2,14 +2,8 @@ package iridiumdev;
 
 public class Sword extends Weapon {
 
-    private String type;
-
-    public Sword(String name, int minDamage, int maxDamage) {
-        super(name, minDamage, maxDamage);
-        this.type = "sword";
+    public Sword(String name, int physicalQuality, int magicalQuality, int minDamage, int maxDamage) {
+        super(name,"slash", physicalQuality, magicalQuality, minDamage, maxDamage);
     }
 
-    public String getType() {
-        return type;
-    }
 }

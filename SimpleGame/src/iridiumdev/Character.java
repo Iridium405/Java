@@ -6,6 +6,7 @@ public abstract class Character {
     private double hitPoints;
     private double energy;
     private double stamina;
+    private int initiative; //TODO
     private int money;
     private int skillPoint;
     private int expGivenWhenDead;

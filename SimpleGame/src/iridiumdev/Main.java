@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static Scanner eventMenu = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     static Dice mainDice = new Dice();
 
     public static void main(String[] args) {
-        boolean combatEvent;
-        boolean npcEvent;
+
+
+
+
 
         Mechanics m = new Mechanics();
 
@@ -81,13 +83,14 @@ public class Main {
 
     }
 
-    public static void randomEventMenu(){
+    public static void menu(){
         System.out.println("\n1. Continue your journey." +
                            "\n2. Check your inventory." +
                            "\n3. Quit.");
-        int x = eventMenu.nextInt();
+        int x = scanner.nextInt();
 
     }
+
 }
 
 /*

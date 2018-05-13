@@ -3,8 +3,8 @@ package iridiumdev;
 public class Player extends Character {
     private int level;
     private int experience;
-
-    Mechanics mechs = new Mechanics();
+    private int phisicalAttackRating; // = weapon quality + strength + skills;
+    private int magicalAttackRating; // = magical weapon bonus + power + skills;
 
     public Player(String name, int hitPoints, int energy, int stamina,
                   int strength, int defence, int quickness, int power, int protection, int focus) {
@@ -46,10 +46,6 @@ public class Player extends Character {
         } else if(this.experience >= 4500 && this.experience < 7500) {
             this.level = 7;
         }
-    }
-
-    public void attack(Enemy enemy) {
-
     }
 
 }
