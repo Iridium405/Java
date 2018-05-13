@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     static Scanner eventMenu = new Scanner(System.in);
+    static Dice mainDice = new Dice();
 
     public static void main(String[] args) {
         boolean combatEvent;
@@ -16,17 +17,6 @@ public class Main {
         Player player = new Player("Dust", 100, 100, 100,
                 5, 5, 1, 5, 5, 1);
 
-        Weapon shortSword = new Weapon("Short Sword", 2, 4);
-        player.equipment.addWeapon(shortSword);
-
-        Armour magicChainmail = new Armour("Magic Chainmail", 5, 4);
-        player.equipment.addArmour(magicChainmail);
-
-        Potion minorHealingPotion = new Potion("Minor Healing Potion", 50, 0);
-        player.equipment.addPotion(minorHealingPotion, 10);
-
-        Weapon woodenClaws = new Weapon("Wooden Claws", 1, 4);
-        Armour leatherArmour = new Armour("Leather Armour", 2, 1);
 
         player.equipment.inventoryContent();
 
@@ -36,8 +26,6 @@ public class Main {
             player.levelChecking();
 
             Enemy enemy = Enemy.randomEnemy(player.getLevel(), m.dice(3));
-            enemy.equipment.addWeapon(woodenClaws);
-            enemy.equipment.addArmour(leatherArmour);
 
             System.out.println("\n                         Enemy: " + enemy.getName() + "\n");
             System.out.println("   Initiative:");

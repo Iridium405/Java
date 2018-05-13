@@ -6,6 +6,7 @@ import java.util.Random;
 public class Mechanics {
 
     ArrayList<Integer> initRolls = new ArrayList<>();
+    private Dice mechanicsDice = new Dice();
 
     public void combat(Character highInit, Character lowInit) {         // highInit - player with higher initiative; lowInit - the opposite;
         int turnCount = 1;

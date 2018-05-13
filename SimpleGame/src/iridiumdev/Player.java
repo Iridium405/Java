@@ -4,6 +4,8 @@ public class Player extends Character {
     private int level;
     private int experience;
 
+    Mechanics mechs = new Mechanics();
+
     public Player(String name, int hitPoints, int energy, int stamina,
                   int strength, int defence, int quickness, int power, int protection, int focus) {
         super(name, hitPoints, energy, stamina, 2, strength, defence, quickness, power, protection, focus, true);
@@ -27,6 +29,7 @@ public class Player extends Character {
         this.experience = experience;
     }
 
+    //USE after every combat(). / method tested.
     public void levelChecking() {
         if(this.experience >= 0 && this.experience < 200) {
             this.level = 1;
@@ -43,7 +46,11 @@ public class Player extends Character {
         } else if(this.experience >= 4500 && this.experience < 7500) {
             this.level = 7;
         }
-    } //USE after every combat(). / method tested.
+    }
+
+    public void attack(Enemy enemy) {
+
+    }
 
 }
 
