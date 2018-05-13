@@ -10,11 +10,11 @@ public class Fight {
     private Enemy enemy3;
     private Enemy enemy4;
     private Enemy enemy5;
-
-    private EnemyFactory enemies;
-    private Dice dice;
+    private Dice dice = new Dice();
 
     private Scanner scanner = new Scanner(System.in);
+    private EnemyFactory enemies = new EnemyFactory();
+
 
 
 

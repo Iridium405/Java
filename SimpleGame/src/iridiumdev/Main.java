@@ -103,7 +103,7 @@ public class Main {
         switch(random){
             case 1:
                 Fight fight = new Fight(player, mainDice.throwDice(3));
-                while(fight.isActive() || player.isAlive()){
+                while(fight.isActive()){
                     fight.menu();
                 }
                 break;
