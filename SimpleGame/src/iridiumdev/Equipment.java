@@ -1,12 +1,41 @@
 package iridiumdev;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Equipment {
+    private boolean menuActive;
+    private boolean submenuEquipActive;
+    private boolean submenuThrowAwayActive;
 
+    private Scanner scanner = new Scanner(System.in);
     private ArrayList<Potion> potionEquipment = new ArrayList<>();
 
-        public boolean addPotion(Potion potion, int amount){
+    public boolean isMenuActive() {
+        return menuActive;
+    }
+
+    public void setMenuActive(boolean menuActive) {
+        this.menuActive = menuActive;
+    }
+
+    public boolean isSubmenuEquipActive() {
+        return submenuEquipActive;
+    }
+
+    public void setSubmenuEquipActive(boolean submenuEquipActive) {
+        this.submenuEquipActive = submenuEquipActive;
+    }
+
+    public boolean isSubmenuThrowAwayActive() {
+        return submenuThrowAwayActive;
+    }
+
+    public void setSubmenuThrowAwayActive(boolean submenuThrowAwayActive) {
+        this.submenuThrowAwayActive = submenuThrowAwayActive;
+    }
+
+    public boolean addPotion(Potion potion, int amount){
         if (potionEquipment.contains(potion)) {
             if (potion.getQuantity() + amount >= 10) {
                 int fullEquipment = 10 - potion.getQuantity();
@@ -52,16 +81,10 @@ public class Equipment {
 
     private ArrayList<Weapon> weaponEquipment = new ArrayList<>();
 
-        public boolean addWeapon(Weapon weapon) {
-        if (weaponEquipment.contains(weapon)) {
-            System.out.println("You got that weapon in your inventory.");
-            return false;
-        } else {
+        public void addWeapon(Weapon weapon) {
             weaponEquipment.add(weapon);
             System.out.println("\n" + weapon.getName() + " added to equipment.");
-            return true;
         }
-    }
 
         private String contentOfWeaponEquipment(){
             System.out.println("\nWeapons:");
@@ -122,12 +145,46 @@ public class Equipment {
             contentOfPotionEquipment();
     }
 
+    public void menu() {
 
+        System.out.println("\n1. Equip [...]" +
+                "\n2. Throw away [...]" +
+                "\n3. Back.");
+        int x = scanner.nextInt();
 
+        if (x == 1) {
+            setSubmenuEquipActive(true);
+            while(submenuEquipActive){
+                  submenuEquip();
+            }
+        }
 
+        if (x == 2){
+            System.out.println("THROW AWAY:");
+        }
+        if (x == 3) {
+            setMenuActive(false);
+        }
+    }
 
+    private void submenuEquip(){
+        System.out.println("\nEQUIP:");
+        System.out.println("1. Weapon(s)" +
+                "\n2. Head Armour" +
+                "\n3. Body Armour" +
+                "\n4. Trinkets" +
+                "\n5. Go back.");
 
+        int x = scanner.nextInt();
 
+        if (x == 5) {
+            setSubmenuEquipActive(false);
+        }
+    }
+
+    private void submenuThrowAway(){
+
+    }
 
 }
 
