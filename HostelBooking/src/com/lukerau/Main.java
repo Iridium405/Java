@@ -2,58 +2,64 @@ package com.lukerau;
 
 
 import java.time.LocalDate;
+import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
     public static final LocalDate TODAY = LocalDate.now();
+    private static final Scanner scanner = new Scanner(System.in);
+    public static final Map<String, String> users = new HashMap<>();
 
     public static void main(String[] args) {
-
-        Map<Integer, String> visitors = new HashMap<>();
-
-        Room room001 = new Room(1,2);
-        Room room002 = new Room(2,1);
-        Room room003 = new Room(3,4);
-
-        Guest guest001 = new Guest("Luke","Rau","Spacerowa 12, 78-300 Świdwin","997-112-123", "123465789");
-        Guest guest002 = new Guest("Unknown","Unknown","Unknown","456-1237-89", "555999461");
-
-        Service roomCleaning = new Service("Room cleaning",12.00);
-        Service breakfast = new Service("Breakfast", 8.50);
-        Service dogAccommodation = new Service("Dog Accommodation", 15.00);
+        User admin = new User("admin", "admin123");
+        users.put(admin.getName(), admin.getPassword());
 
         System.out.println("[Today: " + TODAY + "]");
+        logInMenu();
 
-        room001.printDates();
-        room001.setBookingStart(7,5,2018);
-        room001.setBookingEnd(12,5,2018);
-        room001.printDates();
-        guest001.accommodateToRoom(room001);
+    }
 
-        guest001.addServiceToGuest(roomCleaning);
-        guest001.addServiceToGuest(breakfast);
-        System.out.println("\n");
-        guest001.completeIntel();
+    private static void logInMenu() {
+        boolean loggedIn = false;
+        while (!loggedIn) {
+            System.out.println("1. LOG IN" +
+                    "\n2. EXIT");
+            String a = scanner.nextLine();
+            switch (a) {
+                case "1":
+                    System.out.println("Enter name:");
+                    String name = scanner.nextLine();
+                    if (users.containsKey(name)) {
+                        System.out.println("Enter password:");
+                        String password = scanner.nextLine();
+                        if (users.get(name)) {
+                            System.out.println("Logged in.");
+                            loggedIn = true;
+                        } else {
+                            System.out.println("Wrong password.");
+                        }
+                    } else {
+                        System.out.println("User not found.");
+                    }
+                    break;
+                case "2":
+                    System.out.println("Exit.");
+                    System.exit(0);
+                default:
+                    System.out.println("Type either 1 or 2.");
+            }
+        }
 
-        System.out.println("\n");
-        room001.setBookingStart(15,5,2018);
-        room001.setBookingEnd(17,5,2018);
-        room001.printDates();
-        guest002.accommodateToRoom(room001);
-        guest002.completeIntel();
+        while (loggedIn) {
+            //mainMenu();
+        }
+    }
 
-        System.out.println("\n");
-
-        room001.setBookingStart(10,5,2018);
-        room001.setBookingEnd(14,5,2018);
-//        room001.printDates();
-
-
+    public static void logOutMenu(){
 
     }
 }
-
 /*
 MENU:
     A. LOG IN
