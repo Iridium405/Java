@@ -66,11 +66,9 @@ public class Main {
                             "Which is good, otherwise I would do it you annoying fucktard.");
                     System.exit(666);
                 }
-
             }
         }
         System.out.println("\nYour journey is about to begin.\n");
-        randomEvent(player, mainDice.throwDice(5));
     }
 
     private static void menu(){
@@ -123,7 +121,9 @@ public class Main {
                 System.out.println("1. Yes\n2. No");
                 int x = scanner.nextInt();
                 if (x == 1) {
-                    player.equipment.addWeapon(findings.getWeaponFound());
+                    player.setWeapon(findings.getWeaponFound());
+                    System.out.println("Weapon equipped.");
+                    //player.equipment.addWeapon(findings.getWeaponFound());
                 } else {
                     System.out.println("You left that item behind.");
                 }

@@ -8,8 +8,8 @@ public class Player extends Character {
     private Armour torso;
     private Armour head;
     private Armour other;
-    private int phisicalAttackRating; // = weapon quality + strength + skills;
-    private int magicalAttackRating; // = magical weapon bonus + power + skills;
+    private int physicalAttackRating = 1; // = weapon quality + strength + skills;
+    private int magicalAttackRating = 1; // = magical weapon bonus + power + skills;
 
     public Player(String name, int hitPoints, int energy, int stamina,
                   int strength, int defence, int quickness, int power, int protection, int focus) {
@@ -34,7 +34,38 @@ public class Player extends Character {
         this.experience = experience;
     }
 
-    //USE after every combat(). / method tested.
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Armour getTorso() {
+        return torso;
+    }
+
+    public void setTorso(Armour torso) {
+        this.torso = torso;
+    }
+
+    public Armour getHead() {
+        return head;
+    }
+
+    public void setHead(Armour head) {
+        this.head = head;
+    }
+
+    public Armour getOther() {
+        return other;
+    }
+
+    public void setOther(Armour other) {
+        this.other = other;
+    }
+
     public void levelChecking() {
         if(this.experience >= 0 && this.experience < 200) {
             this.level = 1;
@@ -53,6 +84,10 @@ public class Player extends Character {
         }
     }
 
+    public int makePhysicalDamage(){
+        weapon.makeDamage();
+        return weapon.getDamageMade(); //* physicalAttackRating;
+    }
 }
 
 /*
