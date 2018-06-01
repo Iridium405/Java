@@ -133,9 +133,9 @@ public class Main {
                 new Situation();
                 break;
             case 4:
-                Fight fight = new Fight(player, mainDice.throwDice(3));
+                Fight fight = new Fight(player, mainDice.throwDice(1));
                 while(fight.isActive()){
-                    fight.menu();
+                    fight.menu(player);
                 }
                 break;
             default:

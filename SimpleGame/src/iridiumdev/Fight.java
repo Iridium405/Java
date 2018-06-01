@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class Fight {
     private boolean active = true;
     private boolean physicalAttackMenuActive = true;
-    private Player player;
     private int numberOfEnemies;
     private int enemiesEngaged;
+    private Enemy targetEnemy;
     private Enemy enemy1;
     private Enemy enemy2;
     private Enemy enemy3;
@@ -30,25 +30,25 @@ public class Fight {
                 enemyList.add(enemy1);
                 System.out.println("Single enemy appears:\n" + enemy1.getName());
                 break;
-            case 2:
-                enemiesEngaged = 2;
-                this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
-                enemyList.add(enemy1);
-                this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
-                enemyList.add(enemy2);
-                System.out.println("Two enemies ahead:\n" + enemy1.getName() + ", " + enemy2.getName());
-                break;
-            case 3:
-                enemiesEngaged = 3;
-                this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
-                enemyList.add(enemy1);
-                this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
-                enemyList.add(enemy2);
-                this.enemy3 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
-                enemyList.add(enemy3);
-                System.out.println("Triple threat stand against you:\n" + enemy1.getName() + ", " +
-                        enemy2.getName() + ", " + enemy3.getName());
-                break;
+//            case 2:
+//                enemiesEngaged = 2;
+//                this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+//                enemyList.add(enemy1);
+//                this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+//                enemyList.add(enemy2);
+//                System.out.println("Two enemies ahead:\n" + enemy1.getName() + ", " + enemy2.getName());
+//                break;
+//            case 3:
+//                enemiesEngaged = 3;
+//                this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+//                enemyList.add(enemy1);
+//                this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+//                enemyList.add(enemy2);
+//                this.enemy3 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+//                enemyList.add(enemy3);
+//                System.out.println("Triple threat stand against you:\n" + enemy1.getName() + ", " +
+//                        enemy2.getName() + ", " + enemy3.getName());
+//                break;
 //            case 4:
 //                enemiesEngaged = 4;
 //                this.enemy1 = Enemy.randomEnemy(player.getLevel(),dice.throwDice(3));
@@ -107,8 +107,9 @@ public class Fight {
         this.physicalAttackMenuActive = physicalAttackMenuActive;
     }
 
-    public void menu(){
+    public void menu(Player player){
         System.out.println("Number of enemies: " + enemiesEngaged);
+        setPhysicalAttackMenuActive(true);
         Enemy enemyTarget;
 //        checkInitiative();
         System.out.println("\n1. Attack.\n" +
@@ -120,7 +121,7 @@ public class Fight {
 
         if (x == 1) {
             while (physicalAttackMenuActive){
-                physicalAttackMenu();
+                physicalAttackMenu(player);
             }
         } else if (x == 2) {
             System.out.println("You cast a spell.");
@@ -137,16 +138,17 @@ public class Fight {
     }
 
     private void physicalAttack(Player player, Enemy enemy){
-        int actualDamage = player.makePhysicalDamage() - enemy.getDefence();
-        enemy.setHitPoints(enemy.getHitPoints() - actualDamage);
+        int damage = player.makePhysicalDamage(); // BUG
+        enemy.setHitPoints(enemy.getHitPoints() - damage);
         System.out.println(enemy.getName() + " - " + enemy.getHitPoints() + " HP remains.");
     }
 
-    private void physicalAttackMenu() {
-        String y = scanner.nextLine();
+    private void physicalAttackMenu(Player player) {
+
         if (enemiesEngaged == 1){
             System.out.println("1. Confirm attack.\n" +
                     "2. Go back.");
+            String y = scanner.nextLine();
             switch (y){
                 case "1":
                     physicalAttack(player, enemy1);
@@ -163,6 +165,7 @@ public class Fight {
                 System.out.println(enemyList.indexOf(enemy) + 1 + ". " + enemy.getName());
             }
             System.out.println("3. Go back");
+            String y = scanner.nextLine();
             switch (y) {
                 case "1":
                     physicalAttack(player, enemy1);
@@ -182,6 +185,7 @@ public class Fight {
                 System.out.println(enemyList.indexOf(enemy) + 1 + ". " + enemy.getName());
             }
             System.out.println("4. Go back.");
+            String y = scanner.nextLine();
             switch (y){
                 case "1":
                     physicalAttack(player, enemy1);
