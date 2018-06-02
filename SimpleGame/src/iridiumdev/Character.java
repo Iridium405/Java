@@ -108,6 +108,10 @@ public abstract class Character {
         return skillPoint;
     }
 
+    public void setSkillPoint(int skillPoint) {
+        this.skillPoint = skillPoint;
+    }
+
     public int getExpGivenWhenDead() {
         return expGivenWhenDead;
     }

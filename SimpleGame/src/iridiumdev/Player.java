@@ -1,6 +1,7 @@
 package iridiumdev;
 
 public class Player extends Character {
+    private int temporaryLevel;
     private int level;
     private int experience;
     private int initiative;
@@ -8,6 +9,9 @@ public class Player extends Character {
     private Armour torso;
     private Armour head;
     private Armour other;
+    private Spell spell1;
+    private Spell spell2;
+    private Spell spell3;
     private int physicalAttackRating = 1; // = weapon quality + strength + skills;
     private int magicalAttackRating = 1; // = magical weapon bonus + power + skills;
 
@@ -68,19 +72,40 @@ public class Player extends Character {
 
     public void levelChecking() {
         if(this.experience >= 0 && this.experience < 200) {
+            this.temporaryLevel = level;
             this.level = 1;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 200 && this.experience < 600) {
+            this.temporaryLevel = level;
             this.level = 2;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 600 && this.experience < 1200) {
+            this.temporaryLevel = level;
             this.level = 3;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 1200 && this.experience < 2000) {
+            this.temporaryLevel = level;
             this.level = 4;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 2000 && this.experience < 3000) {
+            this.temporaryLevel = level;
             this.level = 5;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 3000 && this.experience < 4500) {
+            this.temporaryLevel = level;
             this.level = 6;
+            newLevelChecker(temporaryLevel,level);
         } else if(this.experience >= 4500 && this.experience < 7500) {
+            this.temporaryLevel = level;
             this.level = 7;
+            newLevelChecker(temporaryLevel,level);
+        }
+    }
+
+    private void newLevelChecker(int temporaryLevel, int level){
+        if (temporaryLevel < level) {
+            System.out.println("Level Up!");
+            this.setSkillPoint(getSkillPoint() + 2);
         }
     }
 

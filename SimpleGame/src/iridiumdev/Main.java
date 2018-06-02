@@ -128,7 +128,6 @@ public class Main {
                     System.out.println("Weapon equipped.");
                 } else if (x ==2) {
                     player.equipment.addWeapon(findings.getWeaponFound());
-                    System.out.println("Weapon added to your inventory.");
                 } else {
                     System.out.println("You left that item behind.");
                 }
@@ -138,7 +137,8 @@ public class Main {
                 new Situation();
                 break;
             case 4:
-                Fight fight = new Fight(player, mainDice.throwDice(1));
+                int numberOfPossibleEnemies = 3;
+                Fight fight = new Fight(player, mainDice.throwDice(numberOfPossibleEnemies));
                 while(fight.isActive()){
                     fight.menu(player);
                 }

@@ -83,7 +83,7 @@ public class Equipment {
 
         public void addWeapon(Weapon weapon) {
             weaponEquipment.add(weapon);
-            System.out.println("\n" + weapon.getName() + " added to equipment.");
+            System.out.println("\n" + weapon.getName() + " added to inventory.");
         }
 
         private String contentOfWeaponEquipment(){
