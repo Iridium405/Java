@@ -138,7 +138,9 @@ public class Equipment {
     }
 
 
-    public void inventoryContent(){
+    public void inventoryContent(Player player){
+        System.out.println("\n     EQUIPPED:");
+        System.out.println("Weapon: " + player.getWeapon().getName() + "[" + player.getWeapon().getMinDamage() + "-" + player.getWeapon().getMaxDamage() + "]");
         System.out.println("\n     INVENTORY:");
             contentOfWeaponEquipment();
             contentOfArmourEquipment();

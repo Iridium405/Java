@@ -174,12 +174,12 @@ public abstract class Character {
         }
     }
 
-    public boolean lifeCheckValidation(){
+    public boolean lifeCheck(){
         if (this.hitPoints <= 0) {
             setAlive(false);
-            return false;
-        } else {
             return true;
+        } else {
+            return false;
         }
     }
 

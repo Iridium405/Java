@@ -20,5 +20,4 @@ public class WeaponFactory {
     Weapon spear_004 = new Spear("Mistrzowska Włócznia", 11,4,15,30);
     Weapon spear_005 = new Spear("Shadow Piercer", 25, 20,40,90);
 
-
 }

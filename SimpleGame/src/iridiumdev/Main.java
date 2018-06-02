@@ -23,16 +23,19 @@ public class Main {
             if (x.equals("1")) {
                 player = new Player("Dust", 100, 100, 100,
                         5, 5, 1, 5, 5, 1);
+                player.setWeapon(new Fists("Pięści",2,0,1,2));
                 System.out.println("WISE OLD MAN:\n 'Good luck then, Dusty boy. Hope you can achieve great things.'");
                 choiceMade = true;
             } else if (x.equals("2")) {
                 player = new Player("Monyope", 80, 130, 70,
                         4, 3, 2, 8, 7, 7);
+                player.setWeapon(new Fists("Pięści",0,2,0,1));
                 System.out.println("WISE OLD MAN:\n 'Monyope my sweetest, hope the elements will be on your side.'");
                 choiceMade = true;
             } else if (x.equals("3")) {
                 player = new Player("Nightshade", 90, 80, 80,
                         9, 5, 10, 8, 4, 10);
+                player.setWeapon(new Fists("Pięści", 1,1,1,1));
                 System.out.println("WISE OLD MAN:\n 'Good luck my Nightshade. Hope the shadows never leave you in your need.'");
                 choiceMade = true;
             } else {
@@ -81,7 +84,7 @@ public class Main {
             mainTurnCount += 1;
             randomEvent(player, mainDice.throwDice(8));
         } else if (x == 2) {
-            player.equipment.inventoryContent();
+            player.equipment.inventoryContent(player);
             player.equipment.setMenuActive(true);
             while(player.equipment.isMenuActive()){
                 player.equipment.menu();
@@ -118,12 +121,14 @@ public class Main {
                 Findings findings = new Findings();
                 findings.randomWeapon();
                 System.out.println("It's " + findings.getWeaponFound().getName() + ", do you want to keep it?");
-                System.out.println("1. Yes\n2. No");
+                System.out.println("1. Equip\n2. Put into inventory\n3. Throw away");
                 int x = scanner.nextInt();
                 if (x == 1) {
                     player.setWeapon(findings.getWeaponFound());
                     System.out.println("Weapon equipped.");
-                    //player.equipment.addWeapon(findings.getWeaponFound());
+                } else if (x ==2) {
+                    player.equipment.addWeapon(findings.getWeaponFound());
+                    System.out.println("Weapon added to your inventory.");
                 } else {
                     System.out.println("You left that item behind.");
                 }

@@ -71,6 +71,10 @@ public class Fight {
 
     }
 
+    public int getEnemiesEngaged() {
+        return enemiesEngaged;
+    }
+
     public Enemy getEnemy1() {
         return enemy1;
     }
@@ -104,60 +108,68 @@ public class Fight {
     }
 
     public void setPhysicalAttackMenuActive(boolean physicalAttackMenuActive) {
-        this.physicalAttackMenuActive = physicalAttackMenuActive;
+            this.physicalAttackMenuActive = physicalAttackMenuActive;
     }
 
-    public void menu(Player player){
-        System.out.println("Number of enemies: " + enemiesEngaged);
-        setPhysicalAttackMenuActive(true);
-        Enemy enemyTarget;
-//        checkInitiative();
-        System.out.println("\n1. Attack.\n" +
-                "2. Cast Spell.\n" +
-                "3. Use inventory.\n" +
-                "4. Defend.\n" +
-                "5. Run away.");
-        int x = scanner.nextInt();
-
-        if (x == 1) {
-            while (physicalAttackMenuActive){
-                physicalAttackMenu(player);
-            }
-        } else if (x == 2) {
-            System.out.println("You cast a spell.");
-        } else if (x == 3) {
-            System.out.println("You used your inventory.");
-        } else if (x == 4) {
-            System.out.println("You raises all your defenses up.");
-        } else if (x == 5) {
-            System.out.println("You ran away.");
+    public void menu(Player player) {
+        if (enemiesEngaged == 0){
             setActive(false);
+        } else {
+            System.out.println("Number of enemies: " + enemiesEngaged);
+//            Enemy enemyTarget;
+//            checkInitiative();
+            System.out.println("\n1. Attack.\n" +
+                    "2. Cast Spell.\n" +
+                    "3. Use inventory.\n" +
+                    "4. Defend.\n" +
+                    "5. Run away.");
+            setPhysicalAttackMenuActive(true);
+            int x = scanner.nextInt();
+            if (x == 1) {
+                while (physicalAttackMenuActive && enemiesEngaged > 0) {
+                    physicalAttackMenu(player);
+                }
+            } else if (x == 2) {
+                System.out.println("You cast a spell.");
+            } else if (x == 3) {
+                System.out.println("You used your inventory.");
+            } else if (x == 4) {
+                System.out.println("You raises all your defenses up.");
+            } else if (x == 5) {
+                System.out.println("You ran away.");
+                setActive(false);
+            }
         }
-
-//        enemy.lifeCheck();
     }
+
 
     private void physicalAttack(Player player, Enemy enemy){
-        int damage = player.makePhysicalDamage(); // BUG
+        if (enemiesEngaged < 1) {
+            setPhysicalAttackMenuActive(false);
+        }
+        int damage = player.makePhysicalDamage() + player.getWeapon().getPhysicalQuality();
         enemy.setHitPoints(enemy.getHitPoints() - damage);
+        System.out.println(damage + " damage made.");
         System.out.println(enemy.getName() + " - " + enemy.getHitPoints() + " HP remains.");
+        player.lifeCheck();
+        enemy.lifeCheck();
+        if(!enemy.isAlive()) {
+            enemiesEngaged -= 1;
+        }
     }
 
     private void physicalAttackMenu(Player player) {
-
         if (enemiesEngaged == 1){
             System.out.println("1. Confirm attack.\n" +
                     "2. Go back.");
-            String y = scanner.nextLine();
+            int y = scanner.nextInt();
             switch (y){
-                case "1":
+                case 1:
                     physicalAttack(player, enemy1);
                     break;
-                case "2":
+                case 2:
                     setPhysicalAttackMenuActive(false);
                     break;
-                default:
-                    System.out.println("Option unavailable.");
             }
         } else if (enemiesEngaged == 2) {
             System.out.println("Choose enemy:");
@@ -176,8 +188,6 @@ public class Fight {
                 case "3":
                     setPhysicalAttackMenuActive(false);
                     break;
-                default:
-                    System.out.println("Option unavailable.");
             }
         } else if (enemiesEngaged == 3) {
             System.out.println("Choose enemy: ");
@@ -199,8 +209,6 @@ public class Fight {
                 case "4":
                     setPhysicalAttackMenuActive(false);
                     break;
-                default:
-                    System.out.println("Option unavailable.");
             }
         }
     }
