@@ -1,6 +1,8 @@
 package iridiumdev;
 
 
+import java.util.ArrayList;
+
 public abstract class Character {
     private String name;
     private double hitPoints;
@@ -71,6 +73,7 @@ public abstract class Character {
     }
 
     Equipment equipment = new Equipment();
+    Skill skills = new Skill();
 
     public String getName() {
         return name;

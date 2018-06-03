@@ -9,9 +9,12 @@ public class Player extends Character {
     private Armour torso;
     private Armour head;
     private Armour other;
-    private Spell spell1;
-    private Spell spell2;
-    private Spell spell3;
+    private Spell spell_01 = new Magic_Healing("Uzdrowienie", "Life");
+    private Spell spell_02;
+    private Spell spell_03;
+    private Skill skill_01;
+    private Skill skill_02;
+    private Skill skill_03;
     private int physicalAttackRating = 1; // = weapon quality + strength + skills;
     private int magicalAttackRating = 1; // = magical weapon bonus + power + skills;
 
@@ -71,31 +74,39 @@ public class Player extends Character {
     }
 
     public void levelChecking() {
-        if(this.experience >= 0 && this.experience < 200) {
+        int lvl_02 = 200;
+        int lvl_03 = 600;
+        int lvl_04 = 1200;
+        int lvl_05 = 2000;
+        int lvl_06 = 3000;
+        int lvl_07 = 4500;
+        int lvl_08 = 7500;
+
+        if(this.experience >= 0 && this.experience < lvl_02) {
             this.temporaryLevel = level;
             this.level = 1;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 200 && this.experience < 600) {
+        } else if(this.experience >= lvl_02 && this.experience < lvl_03) {
             this.temporaryLevel = level;
             this.level = 2;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 600 && this.experience < 1200) {
+        } else if(this.experience >= lvl_03 && this.experience < lvl_04) {
             this.temporaryLevel = level;
             this.level = 3;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 1200 && this.experience < 2000) {
+        } else if(this.experience >= lvl_04 && this.experience < lvl_05) {
             this.temporaryLevel = level;
             this.level = 4;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 2000 && this.experience < 3000) {
+        } else if(this.experience >= lvl_05 && this.experience < lvl_06) {
             this.temporaryLevel = level;
             this.level = 5;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 3000 && this.experience < 4500) {
+        } else if(this.experience >= lvl_06 && this.experience < lvl_07) {
             this.temporaryLevel = level;
             this.level = 6;
             newLevelChecker(temporaryLevel,level);
-        } else if(this.experience >= 4500 && this.experience < 7500) {
+        } else if(this.experience >= lvl_07 && this.experience < lvl_08) {
             this.temporaryLevel = level;
             this.level = 7;
             newLevelChecker(temporaryLevel,level);
@@ -114,9 +125,3 @@ public class Player extends Character {
         return weapon.getDamageMade(); //* physicalAttackRating;
     }
 }
-
-/*
-    TODO: wprowadzić pole int tempLevel.
-          (zapisywany będzie obecny poziom (przed przyznaniem doświadczenia), następnie będzie porównywany
-          z poziomem po przyznaniu doświadczenia -> jeśli będzie różnica - "Congratulations! Level up!", oraz nowe punkty umiejętności)
- */

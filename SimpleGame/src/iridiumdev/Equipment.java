@@ -145,12 +145,13 @@ public class Equipment {
             contentOfWeaponEquipment();
             contentOfArmourEquipment();
             contentOfPotionEquipment();
+//            contentOfSpellEquipment();
     }
 
     public void menu() {
 
-        System.out.println("\n1. Equip [...]" +
-                "\n2. Throw away [...]" +
+        System.out.println("\n1. Equip [...] - undone." +
+                "\n2. Throw away [...] - undone." +
                 "\n3. Back.");
         int x = scanner.nextInt();
 

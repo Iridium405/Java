@@ -123,10 +123,10 @@ public class Fight {
         } else {
             System.out.println("Number of enemies: " + enemiesEngaged);
 //            checkInitiative();
-            System.out.println("\n1. Attack.\n" +
-                    "2. Cast Spell.\n" +
-                    "3. Use inventory.\n" +
-                    "4. Defend.\n" +
+            System.out.println("\n1. Attack. - done.\n" +
+                    "2. Cast Spell. - in progress.\n" +
+                    "3. Use inventory. - undone.\n" +
+                    "4. Defend. - undone.\n" +
                     "5. Run away.");
             setPhysicalAttackMenuActive(true);
             int x = scanner.nextInt();
