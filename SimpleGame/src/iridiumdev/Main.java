@@ -8,6 +8,7 @@ public class Main {
     private static Dice mainDice = new Dice();
     private static Player player;
 
+
     private static void characterSelect(){
         boolean choiceMade = false;
         int wiseOldManPatience = 11;
@@ -77,7 +78,8 @@ public class Main {
     private static void menu(){
         System.out.println("\n1. Continue your journey." +
                 "\n2. Check your inventory." +
-                "\n3. Go home.");
+                "\n3. Character menu. - undone" +
+                "\n4. Come home.");
         int x = scanner.nextInt();
 
         if (x == 1) {
@@ -89,7 +91,7 @@ public class Main {
             while(player.equipment.isMenuActive()){
                 player.equipment.menu();
             }
-        } else if (x == 3) {
+        } else if (x == 4) {
             System.out.println("You have safely came back.");
                 if(mainTurnCount <= 5) {
                     System.out.println("WISE OLD MAN: 'That doesn't last long. Have you ever left home?'");
@@ -161,6 +163,9 @@ public class Main {
             System.out.println("WISE OLD MAN:\n 'Very well!'");
             characterSelect();
         }
+
+        player.addSpell(player.incantations.learnHealing());
+        player.equipSpellSlot_01(player.spells, player.incantations.learnHealing()); // zmienić!
 
         while (true) {
             menu();

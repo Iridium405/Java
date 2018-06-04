@@ -1,5 +1,9 @@
 package iridiumdev;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Player extends Character {
     private int temporaryLevel;
     private int level;
@@ -23,6 +27,89 @@ public class Player extends Character {
         super(name, hitPoints, energy, stamina, 2, strength, defence, quickness, power, protection, focus, true);
         this.level = 1;
         this.experience = 0;
+    }
+
+    public Set<Skill> skills = new HashSet<>();
+    public Set<Spell> spells = new HashSet<>();
+
+    public void addSkill(Skill skill){
+        int maxSkillsKnown = 7;
+        if(skills.size() <= maxSkillsKnown) {
+            if (!skills.contains(skill)) {
+                skills.add(skill);
+            } else {
+                System.out.println("You already know that skill.");
+            }
+        } else {
+            System.out.println("You cannot learn more skills.");
+        }
+    }
+
+    public void addSpell(Spell spell){
+        int maxSpellsKnown = 7;
+        if(spells.size() <= maxSpellsKnown) {
+            if (!spells.contains(spell)) {
+                spells.add(spell);
+            } else {
+                System.out.println("You already remember that incantation.");
+            }
+        } else {
+            System.out.println("You cannot remember more incantations.");
+        }
+    }
+
+    public Skill equipSkillSlot_01(Set skills, Skill skill) {
+        if (skills.contains(skill)){
+            return this.skill_01 = skill;
+        } else {
+            System.out.println("Cannot equip skill, you heaven't learned.");
+            return null;
+        }
+    }
+
+    public Skill equipSkillSlot_02(Set skills, Skill skill) {
+        if (skills.contains(skill)){
+            return this.skill_02 = skill;
+        } else {
+            System.out.println("Cannot equip skill, you heaven't learned.");
+            return null;
+        }
+    }
+
+    public Skill equipSkillSlot_03(Set skills, Skill skill) {
+        if (skills.contains(skill)){
+            return this.skill_03 = skill;
+        } else {
+            System.out.println("Cannot equip skill, you heaven't learned.");
+            return null;
+        }
+    }
+
+    public Spell equipSpellSlot_01(Set spells, Spell spell){
+        if (spells.contains(spell)){
+            return this.spell_01 = spell;
+        } else {
+            System.out.println("Cannot equip incantation you haven't remembered.");
+            return null;
+        }
+    }
+
+    public Spell equipSpellSlot_02(Set spells, Spell spell){
+        if (spells.contains(spell)){
+            return this.spell_02 = spell;
+        } else {
+            System.out.println("Cannot equip incantation you haven't remembered.");
+            return null;
+        }
+    }
+
+    public Spell equipSpellSlot_03(Set spells, Spell spell){
+        if (spells.contains(spell)){
+            return this.spell_03 = spell;
+        } else {
+            System.out.println("Cannot equip incantation you haven't remembered.");
+            return null;
+        }
     }
 
     public int getLevel() {

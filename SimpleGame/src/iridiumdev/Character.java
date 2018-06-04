@@ -2,6 +2,8 @@ package iridiumdev;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Character {
     private String name;
@@ -73,7 +75,10 @@ public abstract class Character {
     }
 
     Equipment equipment = new Equipment();
-    Skill skills = new Skill();
+    IncantationFactory incantations = new IncantationFactory();
+    SkillFactory abilities = new SkillFactory();
+    private Set<Skill> skills = new HashSet<>();
+    private Set<Spell> spells = new HashSet<>();
 
     public String getName() {
         return name;
