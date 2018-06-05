@@ -165,7 +165,7 @@ public class Fight {
             player.setExperience(player.getExperience() + enemy.getExpGivenWhenDead());
             player.levelChecking();
             System.out.println("Total exp: " + player.getExperience() + ". Your current level: " + player.getLevel());
-            System.out.println("Total skill points unspent: " + player.getSkillPoint());
+            System.out.println("Total skill points unspent: " + player.getAbilityPoints());
             enemyList.remove(enemy);
             enemyList.trimToSize();
             enemiesEngaged -= 1;

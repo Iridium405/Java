@@ -75,10 +75,18 @@ public class Main {
         System.out.println("\nYour journey is about to begin.\n");
     }
 
+    private static void characterSheet(){
+        System.out.println("\n1. Character stats." +
+                "\n2. Skill management." +
+                "\n3. Incantation management." +
+                "\n4. Invest Ability Points. [" + player.getAbilityPoints() + "]" +
+                "\n5. Go back.");
+    }
+
     private static void menu(){
         System.out.println("\n1. Continue your journey." +
                 "\n2. Check your inventory." +
-                "\n3. Character menu. - undone" +
+                "\n3. Character menu. - in progress" +
                 "\n4. Come home.");
         int x = scanner.nextInt();
 
@@ -91,6 +99,8 @@ public class Main {
             while(player.equipment.isMenuActive()){
                 player.equipment.menu();
             }
+        } else if ( x == 3) {
+            characterSheet();
         } else if (x == 4) {
             System.out.println("You have safely came back.");
                 if(mainTurnCount <= 5) {

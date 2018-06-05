@@ -1,8 +1,7 @@
 package iridiumdev;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Player extends Character {
     private int temporaryLevel;
@@ -13,7 +12,7 @@ public class Player extends Character {
     private Armour torso;
     private Armour head;
     private Armour other;
-    private Spell spell_01 = new Magic_Healing("Uzdrowienie", "Life");
+    private Spell spell_01;
     private Spell spell_02;
     private Spell spell_03;
     private Skill skill_01;
@@ -29,8 +28,8 @@ public class Player extends Character {
         this.experience = 0;
     }
 
-    public Set<Skill> skills = new HashSet<>();
-    public Set<Spell> spells = new HashSet<>();
+    public List<Skill> skills = new ArrayList<>();
+    public List<Spell> spells = new ArrayList<>();
 
     public void addSkill(Skill skill){
         int maxSkillsKnown = 7;
@@ -51,64 +50,64 @@ public class Player extends Character {
             if (!spells.contains(spell)) {
                 spells.add(spell);
             } else {
-                System.out.println("You already remember that incantation.");
+                System.out.println("You already remembered that incantation.");
             }
         } else {
             System.out.println("You cannot remember more incantations.");
         }
     }
 
-    public Skill equipSkillSlot_01(Set skills, Skill skill) {
+    public void equipSkillSlot_01(List skills, Skill skill) {
         if (skills.contains(skill)){
-            return this.skill_01 = skill;
+            this.skill_01 = skill;
+            System.out.println("Skill " + skill.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip skill, you heaven't learned.");
-            return null;
         }
     }
 
-    public Skill equipSkillSlot_02(Set skills, Skill skill) {
+    public void equipSkillSlot_02(List skills, Skill skill) {
         if (skills.contains(skill)){
-            return this.skill_02 = skill;
+            this.skill_02 = skill;
+            System.out.println("Skill " + skill.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip skill, you heaven't learned.");
-            return null;
         }
     }
 
-    public Skill equipSkillSlot_03(Set skills, Skill skill) {
+    public void equipSkillSlot_03(List skills, Skill skill) {
         if (skills.contains(skill)){
-            return this.skill_03 = skill;
+            this.skill_03 = skill;
+            System.out.println("Skill " + skill.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip skill, you heaven't learned.");
-            return null;
         }
     }
 
-    public Spell equipSpellSlot_01(Set spells, Spell spell){
+    public void equipSpellSlot_01(List spells, Spell spell){
         if (spells.contains(spell)){
-            return this.spell_01 = spell;
+            this.spell_01 = spell;
+            System.out.println("Spell " + spell.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip incantation you haven't remembered.");
-            return null;
         }
     }
 
-    public Spell equipSpellSlot_02(Set spells, Spell spell){
+    public void equipSpellSlot_02(List spells, Spell spell){
         if (spells.contains(spell)){
-            return this.spell_02 = spell;
+            this.spell_02 = spell;
+            System.out.println("Spell " + spell.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip incantation you haven't remembered.");
-            return null;
         }
     }
 
-    public Spell equipSpellSlot_03(Set spells, Spell spell){
+    public void equipSpellSlot_03(List spells, Spell spell){
         if (spells.contains(spell)){
-            return this.spell_03 = spell;
+            this.spell_03 = spell;
+            System.out.println("Spell " + spell.getName() + " equipped.");
         } else {
             System.out.println("Cannot equip incantation you haven't remembered.");
-            return null;
         }
     }
 
@@ -172,38 +171,38 @@ public class Player extends Character {
         if(this.experience >= 0 && this.experience < lvl_02) {
             this.temporaryLevel = level;
             this.level = 1;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_02 && this.experience < lvl_03) {
             this.temporaryLevel = level;
             this.level = 2;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_03 && this.experience < lvl_04) {
             this.temporaryLevel = level;
             this.level = 3;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_04 && this.experience < lvl_05) {
             this.temporaryLevel = level;
             this.level = 4;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_05 && this.experience < lvl_06) {
             this.temporaryLevel = level;
             this.level = 5;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_06 && this.experience < lvl_07) {
             this.temporaryLevel = level;
             this.level = 6;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         } else if(this.experience >= lvl_07 && this.experience < lvl_08) {
             this.temporaryLevel = level;
             this.level = 7;
-            newLevelChecker(temporaryLevel,level);
+            newLevelChecking(temporaryLevel,level);
         }
     }
 
-    private void newLevelChecker(int temporaryLevel, int level){
+    private void newLevelChecking(int temporaryLevel, int level){
         if (temporaryLevel < level) {
             System.out.println("Level Up!");
-            this.setSkillPoint(getSkillPoint() + 2);
+            this.setAbilityPoints(getAbilityPoints() + 3);
         }
     }
 

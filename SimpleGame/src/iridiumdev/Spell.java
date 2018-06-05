@@ -3,12 +3,12 @@ package iridiumdev;
 public abstract class Spell {
     private String name;
     private String type;
-    private int skillPointsInvested;
+    private int abilityPointsInvested;
 
-    public Spell(String name, String type, int skillPointsInvested) {
+    public Spell(String name, String type, int abilityPointsInvested) {
         this.name = name;
         this.type = type;
-        this.skillPointsInvested = skillPointsInvested;
+        this.abilityPointsInvested = abilityPointsInvested;
     }
 
     public String getName() {
@@ -19,11 +19,15 @@ public abstract class Spell {
         return type;
     }
 
-    public int getSkillPointsInvested() {
-        return skillPointsInvested;
+    public int getAbilityPointsInvested() {
+        return abilityPointsInvested;
     }
 
-    public void setSkillPointsInvested(int skillPointsInvested) {
-        this.skillPointsInvested = skillPointsInvested;
+    public void setAbilityPointsInvested(int abilityPointsInvested) {
+        this.abilityPointsInvested = abilityPointsInvested;
+    }
+
+    public void investAbilityPoint(int amount){
+        this.abilityPointsInvested += amount;
     }
 }

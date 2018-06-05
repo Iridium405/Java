@@ -1,17 +1,13 @@
 package iridiumdev;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 public abstract class Character {
     private String name;
     private double hitPoints;
     private double energy;
     private double stamina;
     private int money;
-    private int skillPoint;
+    private int abilityPoints;
     private int expGivenWhenDead;
     private int strength;
     private int defence;
@@ -23,13 +19,13 @@ public abstract class Character {
     private boolean isEnemy;
     // private double money/coins;
 
-    public Character(String name, double hitPoints, double energy, double stamina, int skillPoint,
+    public Character(String name, double hitPoints, double energy, double stamina, int abilityPoints,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
         this.hitPoints = hitPoints;
         this.energy = energy;
         this.stamina = stamina;
-        this.skillPoint = skillPoint;
+        this.abilityPoints = abilityPoints;
         this.strength = strength;
         this.defence = defence;
         this.quickness = quickness;
@@ -77,8 +73,6 @@ public abstract class Character {
     Equipment equipment = new Equipment();
     IncantationFactory incantations = new IncantationFactory();
     SkillFactory abilities = new SkillFactory();
-    private Set<Skill> skills = new HashSet<>();
-    private Set<Spell> spells = new HashSet<>();
 
     public String getName() {
         return name;
@@ -112,12 +106,12 @@ public abstract class Character {
         return money;
     }
 
-    public int getSkillPoint() {
-        return skillPoint;
+    public int getAbilityPoints() {
+        return abilityPoints;
     }
 
-    public void setSkillPoint(int skillPoint) {
-        this.skillPoint = skillPoint;
+    public void setAbilityPoints(int abilityPoints) {
+        this.abilityPoints = abilityPoints;
     }
 
     public int getExpGivenWhenDead() {

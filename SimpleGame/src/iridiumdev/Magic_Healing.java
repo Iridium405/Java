@@ -8,7 +8,7 @@ public class Magic_Healing extends Spell implements IHealing {
 
     @Override
     public void minorHealing(Player player) {
-        if (getSkillPointsInvested() >= 1 && getSkillPointsInvested() < 3) {
+        if (getAbilityPointsInvested() >= 1 && getAbilityPointsInvested() < 3) {
             player.setEnergy(player.getEnergy() - 20);
             player.setHitPoints(player.getHitPoints() + 20);
         } else {
@@ -18,7 +18,7 @@ public class Magic_Healing extends Spell implements IHealing {
 
     @Override
     public void regularHealing(Player player) {
-        if (getSkillPointsInvested() >= 3 && getSkillPointsInvested() < 7) {
+        if (getAbilityPointsInvested() >= 3 && getAbilityPointsInvested() < 7) {
             player.setEnergy(player.getEnergy() - 60);
             player.setHitPoints(player.getHitPoints() + 50);
         } else {
@@ -28,7 +28,7 @@ public class Magic_Healing extends Spell implements IHealing {
 
     @Override
     public void majorHealing(Player player) {
-        if (getSkillPointsInvested() >= 8 && getSkillPointsInvested() < 14) {
+        if (getAbilityPointsInvested() >= 8 && getAbilityPointsInvested() < 14) {
             player.setEnergy(player.getEnergy() - 140);
             player.setHitPoints(player.getHitPoints() + 100);
         } else {
@@ -38,7 +38,7 @@ public class Magic_Healing extends Spell implements IHealing {
 
     @Override
     public void extremeHealing(Player player) {
-        if (getSkillPointsInvested() >= 15) {
+        if (getAbilityPointsInvested() >= 15) {
             player.setEnergy(player.getEnergy() - 300);
             player.setHitPoints(player.getHitPoints() + 250);
         } else {
