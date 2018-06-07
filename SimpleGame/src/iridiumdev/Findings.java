@@ -36,4 +36,12 @@ public class Findings {
     public Weapon getWeaponFound() {
         return weaponFound;
     }
+
+    public Armour randomArmour(){
+        return null;
+    }
+
+//    public Trinket randomTrinket(){
+//        return null;
+//    }
 }

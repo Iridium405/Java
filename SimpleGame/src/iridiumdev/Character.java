@@ -3,9 +3,12 @@ package iridiumdev;
 
 public abstract class Character {
     private String name;
-    private double hitPoints;
-    private double energy;
-    private double stamina;
+    private int hitPoints;
+    private int maxHitPoints;
+    private int energy;
+    private int maxEnergy;
+    private int stamina;
+    private int maxStamina;
     private int money;
     private int abilityPoints;
     private int expGivenWhenDead;
@@ -17,12 +20,12 @@ public abstract class Character {
     private int focus;
     private boolean isAlive;
     private boolean isEnemy;
-    // private double money/coins;
+    // private int money/coins;
 
-    public Character(String name, double hitPoints, double energy, double stamina, int abilityPoints,
+    public Character(String name, int hitPoints, int energy, int stamina, int abilityPoints,
                      int strength, int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.name = name;
-        this.hitPoints = hitPoints;
+        this.hitPoints = hitPoints; // zrobić currentHitPoints i try {if (currentHitPoints > hitPoints} catch (OutOfBoundExceptions) {);
         this.energy = energy;
         this.stamina = stamina;
         this.abilityPoints = abilityPoints;
@@ -35,7 +38,7 @@ public abstract class Character {
         this.isAlive = isAlive;
     }
 
-    public Character(boolean isEnemy, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
+    public Character(boolean isEnemy, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive) {
         this.isAlive = isAlive;
         this.name = name;
@@ -52,7 +55,7 @@ public abstract class Character {
         this.isEnemy = isEnemy;
     }
 
-    public Character(int money, String name, double hitPoints, double energy, double stamina, int expGivenWhenDead, int strength,
+    public Character(int money, String name, int hitPoints, int energy, int stamina, int expGivenWhenDead, int strength,
                      int defence, int quickness, int power, int protection, int focus, boolean isAlive, boolean isEnemy) {
         this.name = name;
         this.hitPoints = hitPoints;
@@ -78,28 +81,52 @@ public abstract class Character {
         return name;
     }
 
-    public double getHitPoints() {
+    public int getHitPoints() {
         return hitPoints;
     }
 
-    public void setHitPoints(double hitPoints) {
+    public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
 
-    public double getEnergy() {
+    public int getMaxHitPoints() {
+        return maxHitPoints;
+    }
+
+    public void setMaxHitPoints() {
+        this.maxHitPoints = getHitPoints();
+    }
+
+    public int getEnergy() {
         return energy;
     }
 
-    public void setEnergy(double energy) {
+    public void setEnergy(int energy) {
         this.energy = energy;
     }
 
-    public double getStamina() {
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void setMaxEnergy() {
+        this.maxEnergy = getEnergy();
+    }
+
+    public int getStamina() {
         return stamina;
     }
 
-    public void setStamina(double stamina) {
+    public void setStamina(int stamina) {
         this.stamina = stamina;
+    }
+
+    public int getMaxStamina() {
+        return maxStamina;
+    }
+
+    public void setMaxStamina() {
+        this.maxStamina = getStamina();
     }
 
     public int getMoney() {

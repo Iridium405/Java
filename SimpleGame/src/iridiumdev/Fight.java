@@ -25,24 +25,30 @@ public class Fight {
             case 1:
                 enemiesEngaged = 1;
                 this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy1.setMaxHitPoints();
                 enemyList.add(enemy1);
                 System.out.println("Single enemy appears:\n" + enemy1.getName());
                 break;
             case 2:
                 enemiesEngaged = 2;
                 this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy1.setMaxHitPoints();
                 enemyList.add(enemy1);
                 this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy2.setMaxHitPoints();
                 enemyList.add(enemy2);
                 System.out.println("Two enemies ahead:\n" + enemy1.getName() + ", " + enemy2.getName());
                 break;
             case 3:
                 enemiesEngaged = 3;
                 this.enemy1 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy1.setMaxHitPoints();
                 enemyList.add(enemy1);
                 this.enemy2 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy2.setMaxHitPoints();
                 enemyList.add(enemy2);
                 this.enemy3 = enemies.randomEnemy(player.getLevel(), dice.throwDice(3));
+                enemy3.setMaxHitPoints();
                 enemyList.add(enemy3);
                 System.out.println("Triple threat stand against you:\n" + enemy1.getName() + ", " +
                         enemy2.getName() + ", " + enemy3.getName());
@@ -153,10 +159,10 @@ public class Fight {
         if (enemiesEngaged < 1) {
             setPhysicalAttackMenuActive(false);
         }
-        int damage = player.makePhysicalDamage() + player.getWeapon().getPhysicalQuality();
+        int damage = player.makePhysicalDamage() + player.getStrength();
         enemy.setHitPoints(enemy.getHitPoints() - damage);
         System.out.println(damage + " damage made.");
-        System.out.println(enemy.getName() + " - " + enemy.getHitPoints() + " HP remains.");
+        System.out.println(enemy.getName() + ": " + enemy.getHitPoints() + " / " + enemy.getMaxHitPoints() + " HP remains.");
         player.lifeCheck();
         enemy.lifeCheck();
         if(!enemy.isAlive()) {

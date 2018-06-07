@@ -75,14 +75,6 @@ public class Main {
         System.out.println("\nYour journey is about to begin.\n");
     }
 
-    private static void characterSheet(){
-        System.out.println("\n1. Character stats." +
-                "\n2. Skill management." +
-                "\n3. Incantation management." +
-                "\n4. Invest Ability Points. [" + player.getAbilityPoints() + "]" +
-                "\n5. Go back.");
-    }
-
     private static void menu(){
         System.out.println("\n1. Continue your journey." +
                 "\n2. Check your inventory." +
@@ -92,7 +84,7 @@ public class Main {
 
         if (x == 1) {
             mainTurnCount += 1;
-            randomEvent(player, mainDice.throwDice(8));
+            randomEvent(player, mainDice.throwDice(9));
         } else if (x == 2) {
             player.equipment.inventoryContent(player);
             player.equipment.setMenuActive(true);
@@ -100,7 +92,7 @@ public class Main {
                 player.equipment.menu();
             }
         } else if ( x == 3) {
-            characterSheet();
+            player.characterSheet();
         } else if (x == 4) {
             System.out.println("You have safely came back.");
                 if(mainTurnCount <= 5) {
@@ -125,8 +117,9 @@ public class Main {
     private static void randomEvent(Player player, int random) {
         switch(random){
             case 1:
-                System.out.println("You see a caravan of carts heading to you.");
+                System.out.println("You see a caravan of carts heading to you."); // miscellaneous auto-sell
                 new NpcMeeting();
+                System.out.println("-----------------------------");
                 break;
             case 2:
                 System.out.println("You found something!");
@@ -143,10 +136,12 @@ public class Main {
                 } else {
                     System.out.println("You left that item behind.");
                 }
+                System.out.println("-----------------------------");
                 break;
             case 3:
                 System.out.println("Dangerous situation occurred.");
                 new Situation();
+                System.out.println("-----------------------------");
                 break;
             case 4:
                 int numberOfPossibleEnemies = 3;
@@ -154,9 +149,18 @@ public class Main {
                 while(fight.isActive()){
                     fight.menu(player);
                 }
+                System.out.println("-----------------------------");
+                break;
+            case 5:
+                System.out.println("You found something!");
+                MiscFactory misc = new MiscFactory();
+                misc.miscellaneous(mainDice.throwDice(10));
+                System.out.println("It's " + misc.getMiscFound().getName());
+                System.out.println("-----------------------------");
                 break;
             default:
                 System.out.println("This time nothing happened.");
+                System.out.println("-----------------------------");
                 break;
         }
     }
@@ -173,9 +177,6 @@ public class Main {
             System.out.println("WISE OLD MAN:\n 'Very well!'");
             characterSelect();
         }
-
-        player.addSpell(player.incantations.learnHealing());
-        player.equipSpellSlot_01(player.spells, player.incantations.learnHealing()); // zmienić!
 
         while (true) {
             menu();
