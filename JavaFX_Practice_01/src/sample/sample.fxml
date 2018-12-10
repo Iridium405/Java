@@ -1,30 +1,6 @@
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Label?>
-
-
-
-<BorderPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">
-
-    <top>
-        <Label text="This label is in the top position" textFill="navy"
-               BorderPane.alignment="CENTER"/>
-    </top>
-
-    <bottom>
-        <HBox spacing="10" alignment="top_right">
-
-            <padding>
-                <Insets right="10" bottom="10"/>
-            </padding>
-
-            <Button text="Ok" prefWidth="90"/>
-            <Button text="Cancel" prefWidth="90"/>
-            <Button text="Help" prefWidth="90"/>
-
-        </HBox>
-    </bottom>
-
-</BorderPane>
+<?import javafx.scene.layout.GridPane?>
+<GridPane fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" hgap="10" vgap="10">
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Click me."/>
+</GridPane>
