@@ -23,7 +23,7 @@ public class Main extends Application {
 //        greeting.setFont(Font.font("Arial", FontWeight.BOLD, 36));
 
         primaryStage.setTitle("JavaFX Practice");
-        primaryStage.setScene(new Scene(root, 885, 500));
+        primaryStage.setScene(new Scene(root, 1060, 600));
         primaryStage.show();
     }
 
