@@ -133,4 +133,6 @@
         </panes>
     </Accordion>
 
+    <Label fx:id="nothingHappenedLabel" text="Nothing has happened." GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+
 </GridPane>

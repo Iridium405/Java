@@ -1,9 +1,11 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class Controller {
@@ -16,6 +18,8 @@ public class Controller {
     private TextField nameField;
     @FXML
     private CheckBox clearFieldCheckBox;
+    @FXML
+    private Label nothingHappenedLabel;
 
 
 
@@ -32,7 +36,31 @@ public class Controller {
         } else if (event.getSource().equals(byeButton)) {
             System.out.println("Bye, " + nameField.getText());
         }
-        
+
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String s = Platform.isFxApplicationThread() ? "UI Thread" : "Background Thread";
+                    System.out.println("Going sleep in " + s);
+                    Thread.sleep(3000);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            nothingHappenedLabel.setText("Something happened!");
+                            String s = Platform.isFxApplicationThread() ? "UI Thread" : "Background Thread";
+                            System.out.println("Executing in " + s);
+                        }
+                    });
+                } catch (InterruptedException ex) {
+                    //stacktrace
+                }
+            }
+        };
+
+        new Thread(task).start();
+
+
         if(clearFieldCheckBox.isSelected()) {
             nameField.clear();
             initialize();
