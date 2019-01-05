@@ -9,8 +9,9 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import sample.datamodel.TodoItem;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class Controller {
 
 
     public void initialize() {
-        TodoItem item1 = new TodoItem("Default short description", "Default details", LocalDate.now());
-        TodoItem item2 = new TodoItem("Second short description", "Full details of second item", LocalDate.of(2019, Month.JANUARY, 1));
+        TodoItem item1 = new TodoItem("Default short description", "Default details", LocalDateTime.now());
+        TodoItem item2 = new TodoItem("Second short description", "Full details of second item", LocalDateTime.of(2019,Month.MAY,4,17,30));
         todoItems = new ArrayList<TodoItem>();
         todoItems.add(item1);
         todoItems.add(item2);
@@ -42,6 +43,8 @@ public class Controller {
                 if(t1 != null) {
                     TodoItem item = todoListView.getSelectionModel().getSelectedItem();
                     itemDetailsTextArea.setText(item.getDetails());
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("EEEE - d MMMM yyyy, kk:mm");
+                    deadlineLabel.setText(df.format(item.getDeadline()));
                 }
             }
         });
