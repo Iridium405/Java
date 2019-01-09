@@ -1,14 +1,14 @@
 package sample.datamodel;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TodoItem {
 
     private String shortDescription;
     private String details;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
-    public TodoItem(String shortDescription, String details, LocalDateTime deadline) {
+    public TodoItem(String shortDescription, String details, LocalDate deadline) {
         this.shortDescription = shortDescription;
         this.details = details;
         this.deadline = deadline;
@@ -30,11 +30,11 @@ public class TodoItem {
         this.details = details;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 

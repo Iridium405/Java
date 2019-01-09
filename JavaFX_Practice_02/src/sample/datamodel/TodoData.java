@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
@@ -27,15 +26,15 @@ public class TodoData {
     }
 
     private TodoData() {
-        formatter = DateTimeFormatter.ofPattern("EEEE - d MMMM yyyy, kk:mm");
+        formatter = DateTimeFormatter.ofPattern("EEEE - d MMMM yyyy");
     }
 
     public List<TodoItem> getTodoItems() {
         return todoItems;
     }
 
-    public void setTodoItems(List<TodoItem> todoItems) {
-        this.todoItems = todoItems;
+    public void addTodoItem(TodoItem item) {
+        todoItems.add(item);
     }
 
     public void loadTodoItems() throws IOException {
@@ -54,7 +53,7 @@ public class TodoData {
                 String details = itemPieces[1];
                 String dateString = itemPieces[2];
 
-                LocalDateTime date = LocalDateTime.parse(dateString, formatter);
+                LocalDate date = LocalDate.parse(dateString, formatter);
                 TodoItem todoItem = new TodoItem(shortDescription, details, date);
                 todoItems.add(todoItem);
             }
@@ -85,4 +84,6 @@ public class TodoData {
             }
         }
     }
+
+
 }
