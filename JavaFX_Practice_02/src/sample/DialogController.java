@@ -8,7 +8,6 @@ import sample.datamodel.TodoData;
 import sample.datamodel.TodoItem;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class DialogController {
 
