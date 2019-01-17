@@ -14,6 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ToggleButton?>
 <BorderPane fx:id="mainBorderPane" fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml">
     <top>
         <VBox>
@@ -22,23 +23,56 @@
                     <items>
                         <MenuItem text="New..." onAction="#showNewItemDialog"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="Exit"/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
                     </items>
                 </Menu>
             </MenuBar>
 
             <ToolBar>
-                <HBox>
-                    <Button onAction="#showNewItemDialog">
+                <HBox spacing="5">
+                    <Button onAction="#showNewItemDialog" maxHeight="60" maxWidth="60">
                         <tooltip>
                             <Tooltip text="Create new Todo item"/>
                         </tooltip>
                         <graphic>
                             <ImageView>
-                                <Image url="@images/newDocumentMiniature.png" requestedHeight="32" requestedWidth="25"/>
+                                <Image url="@images/newDocument32px.png" />
                             </ImageView>
                         </graphic>
                     </Button>
+                    <Button maxHeight="60" maxWidth="60">
+                        <tooltip>
+                            <Tooltip text="Edit Todo item"/>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@images/editDocument32px.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button maxHeight="60" maxWidth="60">
+                        <tooltip>
+                            <Tooltip text="Delete Todo item"/>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@images/deleteDocument32px.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <VBox spacing="5" >
+                        <ToggleButton fx:id="filterToggleButton" text="Today's items" onAction="#handleFilterButton"
+                        maxWidth="300">
+                            <tooltip>
+                                <Tooltip text="Show today's items only."/>
+                            </tooltip>
+                        </ToggleButton>
+                        <ToggleButton text="Tomorrow's items" maxWidth="300">
+                            <tooltip>
+                                <Tooltip text="Show tomorrow's items only."/>
+                            </tooltip>
+                        </ToggleButton>
+                    </VBox>
                 </HBox>
             </ToolBar>
         </VBox>

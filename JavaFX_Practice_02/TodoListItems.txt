@@ -1,1 +1,7 @@
 First Todo item	The description of first Todo item.	sobota - 12 stycznia 2019
+Second Todo Item	The description of second Todo item.	środa - 16 stycznia 2019
+13.01 Todo item	Should be coloured red on 13.01	niedziela - 13 stycznia 2019
+Today 1	Description.	czwartek - 17 stycznia 2019
+Today 2	Description	czwartek - 17 stycznia 2019
+Tomorrow	18.01.19	piątek - 18 stycznia 2019
+Third Todo Item	Description	czwartek - 31 stycznia 2019
