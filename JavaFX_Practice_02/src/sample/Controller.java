@@ -13,11 +13,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import sample.datamodel.TodoData;
 import sample.datamodel.TodoItem;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -217,6 +221,17 @@ public class Controller {
     @FXML
     public void handleExit() {
         Platform.exit();
+    }
+
+    @FXML
+    public void loadFile() {
+        DirectoryChooser chooser = new DirectoryChooser();
+        File file = chooser.showDialog(mainBorderPane.getScene().getWindow());
+        if(file != null) {
+            System.out.println(file.getPath());
+        } else {
+            System.out.println("Cancelled.");
+        }
     }
 
 }

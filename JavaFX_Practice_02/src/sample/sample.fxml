@@ -23,13 +23,17 @@
                     <items>
                         <MenuItem text="New..." onAction="#showNewItemDialog"/>
                         <SeparatorMenuItem/>
+                        <MenuItem text="Load" onAction="#loadFile"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Save" onAction="#loadFile"/>
+                        <SeparatorMenuItem/>
                         <MenuItem text="Exit" onAction="#handleExit"/>
                     </items>
                 </Menu>
             </MenuBar>
 
             <ToolBar>
-                <HBox spacing="5">
+                <HBox spacing="10">
                     <Button onAction="#showNewItemDialog" maxHeight="60" maxWidth="60">
                         <tooltip>
                             <Tooltip text="Create new Todo item"/>
@@ -73,6 +77,7 @@
                             </tooltip>
                         </ToggleButton>
                     </VBox>
+
                 </HBox>
             </ToolBar>
         </VBox>
