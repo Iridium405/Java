@@ -22,7 +22,7 @@ public class ViewManager {
         this.mainScene = new Scene(mainPane, WIDTH, HEIGHT);
         this.mainStage = new Stage();
         mainStage.setScene(mainScene);
-//        createButtons();
+        createButtons();
     }
 
 
